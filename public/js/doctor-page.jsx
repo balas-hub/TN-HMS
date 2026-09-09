@@ -306,17 +306,21 @@ function DoctorLoginGate({ onLoginSuccess, onToast }) {
       const res = await fetch('/api/auth/doctor/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ regNo: regNo.trim(), password })
+        body: JSON.stringify({ 
+          regNo: regNo.trim(), 
+          password: password.trim(),
+          pin: password.trim()
+        })
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.doctor) {
         onToast(`Welcome, ${data.doctor.name}`);
         onLoginSuccess(data.doctor);
       } else {
-        onToast(data.message || 'Doctor login failed', 'error');
+        onToast(data.message || 'Invalid registration number or password', 'error');
       }
     } catch (err) {
-      onToast('Server error during doctor authentication', 'error');
+      onToast('Server connection error during doctor authentication', 'error');
     } finally {
       setIsLoading(false);
     }
@@ -403,9 +407,31 @@ function DoctorLoginGate({ onLoginSuccess, onToast }) {
   );
 }
 
-// 4. Main Standalone Doctor Workbench App
 function DoctorStandaloneApp() {
-  const [doctorSession, setDoctorSession] = useState(null);
+  const [doctorSession, setDoctorSession] = useState(() => {
+    try {
+      const saved = localStorage.getItem('tn_doctor_session');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+
+  const handleDoctorLoginSuccess = (doc) => {
+    try {
+      localStorage.setItem('tn_doctor_session', JSON.stringify(doc));
+    } catch (e) {}
+    setDoctorSession(doc);
+  };
+
+  const handleDoctorLogout = () => {
+    try {
+      localStorage.removeItem('tn_doctor_session');
+    } catch (e) {}
+    setDoctorSession(null);
+    addToast('Doctor session ended successfully', 'info');
+  };
+
   const [queue, setQueue] = useState([]);
   const [selectedQueuePatient, setSelectedQueuePatient] = useState(null);
   const [activeWorkbenchTab, setActiveWorkbenchTab] = useState('notes');
@@ -602,7 +628,7 @@ function DoctorStandaloneApp() {
     return (
       <div>
         <ToastList toasts={toasts} />
-        <DoctorLoginGate onLoginSuccess={setDoctorSession} onToast={addToast} />
+        <DoctorLoginGate onLoginSuccess={handleDoctorLoginSuccess} onToast={addToast} />
       </div>
     );
   }
@@ -640,10 +666,7 @@ function DoctorStandaloneApp() {
             <button 
               className="btn btn-danger" 
               style={{ fontSize: '13px', padding: '8px 16px' }}
-              onClick={() => {
-                setDoctorSession(null);
-                addToast('Doctor logged out successfully');
-              }}
+              onClick={handleDoctorLogout}
             >
               Sign Out
             </button>
