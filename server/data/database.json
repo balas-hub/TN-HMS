@@ -1,0 +1,633 @@
+{
+  "patients": [
+    {
+      "id": "P-1001",
+      "receiptId": "TN-REC-8841",
+      "abhaId": "14-9923-4512-7801",
+      "abhaAddress": "karthik.s@abdm",
+      "name": "Karthikeyan Subramanian",
+      "age": 48,
+      "gender": "Male",
+      "bloodGroup": "O +ve",
+      "phone": "+91 98401 23456",
+      "address": "No. 42, Anna Salai, Teynampet, Chennai, Tamil Nadu - 600018",
+      "centerName": "Government Multi Super Speciality Hospital, Omandurar Estate, Chennai",
+      "admissionDate": "05-Sep-2026",
+      "dischargeDate": "08-Sep-2026",
+      "status": "Discharged - Stable",
+      "department": "Cardiology",
+      "consultingDoctor": "Dr. S. K. Aravind, MD, DM (Cardiology)",
+      "doctorRegNo": "TMC-48291",
+      "vitals": {
+        "bp": "128/84 mmHg",
+        "pulse": "74 bpm",
+        "spo2": "99%",
+        "temp": "98.4 °F",
+        "weight": "72 kg",
+        "height": "172 cm",
+        "bmi": "24.3",
+        "bloodSugarFasting": "108 mg/dL"
+      },
+      "clinicalSummary": {
+        "chiefComplaints": "Exertional dyspnea and mild retrosternal chest discomfort for 4 days.",
+        "diagnosis": "Ischemic Heart Disease (Mild CAD) - Stabilized, Essential Hypertension (Stage 1)",
+        "clinicalNotes": "Patient presented with atypical chest pain on exertion. Troponin T negative. 2D Echo showed normal LV systolic function (LVEF 58%). Coronary angiography showed single vessel 40% stenosis in mid-LAD, managed medically. Hemodynamically stable upon discharge.",
+        "allergies": "No known drug allergies (NKDA)"
+      },
+      "labReports": [
+        {
+          "testName": "Complete Blood Count (CBC)",
+          "date": "05-Sep-2026",
+          "result": "Hb: 14.2 g/dL, WBC: 7,800 /mcL, Platelets: 2.4 Lakhs",
+          "status": "Normal",
+          "normalRange": "Hb: 13-17 g/dL"
+        },
+        {
+          "testName": "Lipid Profile",
+          "date": "05-Sep-2026",
+          "result": "Total Chol: 210 mg/dL, LDL: 132 mg/dL, HDL: 44 mg/dL, Triglycerides: 170 mg/dL",
+          "status": "Borderline High",
+          "normalRange": "LDL < 100 mg/dL"
+        },
+        {
+          "testName": "Cardiac Troponin I",
+          "date": "05-Sep-2026",
+          "result": "0.01 ng/mL (Negative)",
+          "status": "Normal",
+          "normalRange": "< 0.04 ng/mL"
+        },
+        {
+          "testName": "12-Lead ECG",
+          "date": "06-Sep-2026",
+          "result": "Normal sinus rhythm, non-specific T-wave flattening in V4-V6",
+          "status": "Stable",
+          "normalRange": "Normal Sinus"
+        },
+        {
+          "testName": "2D Echocardiography",
+          "date": "06-Sep-2026",
+          "result": "LVEF 58%, No regional wall motion abnormalities, Grade 1 diastolic dysfunction",
+          "status": "Mild Abnormality",
+          "normalRange": "LVEF > 55%"
+        }
+      ],
+      "prescriptions": [
+        {
+          "medicine": "Tab. Ecosprin (Aspirin)",
+          "dosage": "75 mg",
+          "frequency": "1 - 0 - 0",
+          "timing": "After Breakfast",
+          "duration": "30 Days",
+          "instructions": "Continue daily, do not skip"
+        },
+        {
+          "medicine": "Tab. Atorva (Atorvastatin)",
+          "dosage": "20 mg",
+          "frequency": "0 - 0 - 1",
+          "timing": "After Dinner",
+          "duration": "30 Days",
+          "instructions": "Night time, lipid control"
+        },
+        {
+          "medicine": "Tab. Telma (Telmisartan)",
+          "dosage": "40 mg",
+          "frequency": "1 - 0 - 0",
+          "timing": "Morning",
+          "duration": "30 Days",
+          "instructions": "For BP control"
+        },
+        {
+          "medicine": "Tab. Pan-D (Pantoprazole + Domperidone)",
+          "dosage": "40 mg",
+          "frequency": "1 - 0 - 0",
+          "timing": "Before Breakfast",
+          "duration": "10 Days",
+          "instructions": "Empty stomach"
+        }
+      ],
+      "billing": {
+        "totalAmount": "₹ 14,850",
+        "insuranceScheme": "Chief Minister's Comprehensive Health Insurance Scheme (CMCHIS) / Ayushman Bharat (AB-PMJAY)",
+        "schemeApproved": "₹ 14,850",
+        "patientPayable": "₹ 0.00 (Fully Covered)",
+        "paymentStatus": "Settled via Gov Scheme"
+      },
+      "followUp": "18-Sep-2026 at Cardiology OPD, Room 104"
+    },
+    {
+      "id": "P-1002",
+      "receiptId": "TN-REC-4920",
+      "abhaId": "14-8821-3342-9901",
+      "abhaAddress": "priya.ramanathan@abdm",
+      "name": "Priya Ramanathan",
+      "age": 34,
+      "gender": "Female",
+      "bloodGroup": "B +ve",
+      "phone": "+91 97902 54321",
+      "address": "Plot 18, Gandhi Nagar 2nd Street, Madurai, Tamil Nadu - 625020",
+      "centerName": "Government Rajaji Hospital & Pan-India Medical Centre, Madurai",
+      "admissionDate": "07-Sep-2026",
+      "dischargeDate": "Active OPD Consultation",
+      "status": "Outpatient - Active Care",
+      "department": "Endocrinology & Diabetology",
+      "consultingDoctor": "Dr. Meenakshi Sundaram, MD (General Medicine), DM (Endo)",
+      "doctorRegNo": "TMC-52190",
+      "vitals": {
+        "bp": "118/76 mmHg",
+        "pulse": "78 bpm",
+        "spo2": "99%",
+        "temp": "98.6 °F",
+        "weight": "61 kg",
+        "height": "158 cm",
+        "bmi": "24.4",
+        "bloodSugarFasting": "142 mg/dL"
+      },
+      "clinicalSummary": {
+        "chiefComplaints": "Polydipsia, generalized fatigue, and recent unexplained weight changes for 3 weeks.",
+        "diagnosis": "Type 2 Diabetes Mellitus (Newly Detected), Subclinical Hypothyroidism",
+        "clinicalNotes": "Patient evaluated for persistent lethargy and increased thirst. Fasting plasma glucose elevated at 142 mg/dL with HbA1c at 7.8%. Started on lifestyle modifications, medical nutrition therapy, and oral antidiabetic therapy.",
+        "allergies": "Penicillin allergy (skin rash)"
+      },
+      "labReports": [
+        {
+          "testName": "Glycated Hemoglobin (HbA1c)",
+          "date": "07-Sep-2026",
+          "result": "7.8 %",
+          "status": "High",
+          "normalRange": "< 5.7 %"
+        },
+        {
+          "testName": "Fasting Blood Glucose",
+          "date": "07-Sep-2026",
+          "result": "142 mg/dL",
+          "status": "High",
+          "normalRange": "70 - 99 mg/dL"
+        },
+        {
+          "testName": "Post Prandial Blood Glucose",
+          "date": "07-Sep-2026",
+          "result": "196 mg/dL",
+          "status": "High",
+          "normalRange": "< 140 mg/dL"
+        },
+        {
+          "testName": "Thyroid Stimulating Hormone (TSH)",
+          "date": "07-Sep-2026",
+          "result": "6.12 uIU/mL",
+          "status": "Mildly Elevated",
+          "normalRange": "0.4 - 4.2 uIU/mL"
+        },
+        {
+          "testName": "Serum Creatinine",
+          "date": "07-Sep-2026",
+          "result": "0.8 mg/dL",
+          "status": "Normal",
+          "normalRange": "0.5 - 1.1 mg/dL"
+        }
+      ],
+      "prescriptions": [
+        {
+          "medicine": "Tab. Metformin (Glucophage SR)",
+          "dosage": "500 mg",
+          "frequency": "1 - 0 - 1",
+          "timing": "After Meals",
+          "duration": "60 Days",
+          "instructions": "Take with food to minimize GI discomfort"
+        },
+        {
+          "medicine": "Tab. Thyronorm (Levothyroxine)",
+          "dosage": "25 mcg",
+          "frequency": "1 - 0 - 0",
+          "timing": "Before Breakfast",
+          "duration": "60 Days",
+          "instructions": "Early morning, empty stomach with plain water"
+        },
+        {
+          "medicine": "Cap. Becosules (Vitamin B-Complex)",
+          "dosage": "1 cap",
+          "frequency": "0 - 1 - 0",
+          "timing": "After Lunch",
+          "duration": "30 Days",
+          "instructions": "Daily nutritional support"
+        }
+      ],
+      "billing": {
+        "totalAmount": "₹ 1,850",
+        "insuranceScheme": "Direct Government Subsidized OPD Care",
+        "schemeApproved": "₹ 1,850",
+        "patientPayable": "₹ 0.00",
+        "paymentStatus": "Free OPD Service"
+      },
+      "followUp": "07-Nov-2026 with repeat HbA1c & Fasting Glucose"
+    },
+    {
+      "id": "P-1003",
+      "receiptId": "TN-REC-7731",
+      "abhaId": "14-7712-9081-6542",
+      "abhaAddress": "selvaraj.m@abdm",
+      "name": "Selvaraj Murugesan",
+      "age": 62,
+      "gender": "Male",
+      "bloodGroup": "A +ve",
+      "phone": "+91 94432 10987",
+      "address": "15-B, Cross Cut Road, Gandhipuram, Coimbatore, Tamil Nadu - 641012",
+      "centerName": "Coimbatore Medical College Hospital (CMCH) & Pan-India Trauma Care",
+      "admissionDate": "02-Sep-2026",
+      "dischargeDate": "06-Sep-2026",
+      "status": "Post-Operative Recovery",
+      "department": "Orthopaedics & Joint Reconstruction",
+      "consultingDoctor": "Dr. K. Vijayaraghavan, MS (Ortho), MCh",
+      "doctorRegNo": "TMC-39811",
+      "vitals": {
+        "bp": "124/80 mmHg",
+        "pulse": "72 bpm",
+        "spo2": "98%",
+        "temp": "98.2 °F",
+        "weight": "78 kg",
+        "height": "168 cm",
+        "bmi": "27.6",
+        "bloodSugarFasting": "102 mg/dL"
+      },
+      "clinicalSummary": {
+        "chiefComplaints": "Severe right knee pain and limitation of mobility for 1 year, aggravated recently.",
+        "diagnosis": "Right Knee Primary Osteoarthritis (Grade IV Kellgren-Lawrence) - Post Total Knee Arthroplasty (TKA)",
+        "clinicalNotes": "Underwent uncomplicated Right Total Knee Replacement on 03-Sep-2026. Surgical wound healthy, no signs of infection. Mobilized with walker on post-op day 1. Full weight bearing tolerated with physical therapy.",
+        "allergies": "Sulfa drugs"
+      },
+      "labReports": [
+        {
+          "testName": "Right Knee Digital X-Ray (Post-Op)",
+          "date": "04-Sep-2026",
+          "result": "Prosthetic alignment anatomically accurate, no periprosthetic lucency",
+          "status": "Optimal",
+          "normalRange": "Proper alignment"
+        },
+        {
+          "testName": "C-Reactive Protein (CRP)",
+          "date": "05-Sep-2026",
+          "result": "8.2 mg/L (Post-op expected drop)",
+          "status": "Decreasing",
+          "normalRange": "< 5.0 mg/L"
+        },
+        {
+          "testName": "Hemoglobin (Post-Op Day 2)",
+          "date": "05-Sep-2026",
+          "result": "11.6 g/dL",
+          "status": "Acceptable",
+          "normalRange": "13-17 g/dL"
+        }
+      ],
+      "prescriptions": [
+        {
+          "medicine": "Tab. Dolo (Paracetamol)",
+          "dosage": "650 mg",
+          "frequency": "1 - 1 - 1",
+          "timing": "SOS / After Meals",
+          "duration": "7 Days",
+          "instructions": "For pain relief as needed"
+        },
+        {
+          "medicine": "Tab. Cefuroxime (Ceftum)",
+          "dosage": "500 mg",
+          "frequency": "1 - 0 - 1",
+          "timing": "After Food",
+          "duration": "5 Days",
+          "instructions": "Complete antibiotic course"
+        },
+        {
+          "medicine": "Tab. Shelcal (Calcium + Vit D3)",
+          "dosage": "500 mg",
+          "frequency": "0 - 1 - 0",
+          "timing": "After Food",
+          "duration": "60 Days",
+          "instructions": "Bone strengthening"
+        },
+        {
+          "medicine": "Inj. Clexane (Enoxaparin)",
+          "dosage": "40 mg",
+          "frequency": "Subcutaneous",
+          "timing": "Once Daily",
+          "duration": "3 Days",
+          "instructions": "Deep vein thrombosis prophylaxis"
+        }
+      ],
+      "billing": {
+        "totalAmount": "₹ 1,12,000",
+        "insuranceScheme": "Chief Minister's Comprehensive Health Insurance Scheme (CMCHIS)",
+        "schemeApproved": "₹ 1,12,000",
+        "patientPayable": "₹ 0.00",
+        "paymentStatus": "Approved 100% Cashless"
+      },
+      "followUp": "16-Sep-2026 for Suture Removal & Mobility Check"
+    },
+    {
+      "id": "P-9181",
+      "receiptId": "TN-REC-2844",
+      "abhaId": "14-5925-4121-9250",
+      "abhaAddress": "sundar.pichai@abdm",
+      "name": "Sundar Pichai",
+      "age": 52,
+      "gender": "Male",
+      "bloodGroup": "O +ve",
+      "phone": "98409 99999",
+      "address": "Chennai, Tamil Nadu",
+      "centerName": "Government Multi Super Speciality Hospital, Omandurar, Chennai",
+      "admissionDate": "09 Sept 2026",
+      "dischargeDate": "Active OPD Registered",
+      "status": "Active Citizen Health Locker",
+      "department": "General Medicine / Preventive Health",
+      "consultingDoctor": "Dr. S. K. Aravind, MD, DM (Cardiology)",
+      "doctorRegNo": "TMC-48291",
+      "pin": "1234",
+      "vitals": {
+        "bp": "120/80 mmHg",
+        "pulse": "72 bpm",
+        "spo2": "99%",
+        "temp": "98.4 °F",
+        "weight": "68 kg",
+        "height": "168 cm",
+        "bmi": "24.1",
+        "bloodSugarFasting": "95 mg/dL"
+      },
+      "clinicalSummary": {
+        "chiefComplaints": "New Citizen Health Profile Enrollment & Initial Consultation",
+        "diagnosis": "Healthy Individual - Periodic Routine Evaluation Scheduled",
+        "clinicalNotes": "Self-registered via Tamil Nadu Health Care Portal. Ayushman Bharat Digital Mission (ABDM) record generated.",
+        "allergies": "None Reported"
+      },
+      "labReports": [
+        {
+          "testName": "Complete Health Screening Profile",
+          "date": "09 Sept 2026",
+          "result": "Baseline Parameters Within Normal Range",
+          "normalRange": "Standard Normal",
+          "status": "Normal"
+        }
+      ],
+      "prescriptions": [
+        {
+          "medicine": "Tab. Multivitamin & Minerals (Govt Medical Store)",
+          "dosage": "1 Tab",
+          "frequency": "0 - 1 - 0",
+          "timing": "After Lunch",
+          "duration": "30 Days",
+          "instructions": "Daily preventive wellness"
+        }
+      ],
+      "billing": {
+        "totalAmount": "₹ 0.00 (Free Government Enrollment)",
+        "insuranceScheme": "Chief Minister's Comprehensive Health Insurance Scheme (CMCHIS)",
+        "schemeApproved": "100% Cashless Coverage Active",
+        "patientPayable": "₹ 0.00 (Free of Cost)",
+        "paymentStatus": "Approved via Government Scheme"
+      },
+      "followUp": "Visit nearest Government Primary Health Centre (PHC) or Hospital for annual checkup."
+    },
+    {
+      "id": "P-2211",
+      "receiptId": "TN-REC-6645",
+      "abhaId": "14-1243-4496-7594",
+      "abhaAddress": "meenakshi.sunda@abdm",
+      "name": "Meenakshi Sundaram",
+      "age": 31,
+      "gender": "Female",
+      "bloodGroup": "B +ve",
+      "phone": "9840999888",
+      "dob": "1995-04-20",
+      "guardianName": "Sundaram Natarajan",
+      "emergencyPhone": "9444011223",
+      "email": "meenakshi.s@gmail.com",
+      "district": "Madurai",
+      "pincode": "625001",
+      "address": "No. 28, South Veli Street, Madurai - 625001, Tamil Nadu",
+      "centerName": "Government Multi Super Speciality Hospital, Madurai Apex Centre",
+      "admissionDate": "09 Sept 2026",
+      "dischargeDate": "Active OPD Registered",
+      "status": "Active Citizen Health Locker",
+      "department": "General Medicine / Preventive Health",
+      "consultingDoctor": "Dr. S. K. Aravind, MD, DM (Cardiology)",
+      "doctorRegNo": "TMC-48291",
+      "pin": "5678",
+      "vitals": {
+        "bp": "120/80 mmHg",
+        "pulse": "72 bpm",
+        "spo2": "99%",
+        "temp": "98.4 °F",
+        "weight": "68 kg",
+        "height": "168 cm",
+        "bmi": "24.1",
+        "bloodSugarFasting": "95 mg/dL"
+      },
+      "clinicalSummary": {
+        "chiefComplaints": "New Citizen Health Profile Enrollment & Initial Consultation",
+        "diagnosis": "Pre-existing: Mild Asthma",
+        "clinicalNotes": "Self-registered via Tamil Nadu Health Care Portal. Guardian/Relation: Sundaram Natarajan. Emergency: 9444011223. Ayushman Bharat Digital Mission (ABDM) record generated.",
+        "allergies": "Penicillin Allergy"
+      },
+      "labReports": [
+        {
+          "testName": "Complete Health Screening Profile",
+          "date": "09 Sept 2026",
+          "result": "Baseline Parameters Within Normal Range",
+          "normalRange": "Standard Normal",
+          "status": "Normal"
+        }
+      ],
+      "prescriptions": [
+        {
+          "medicine": "Tab. Multivitamin & Minerals (Govt Medical Store)",
+          "dosage": "1 Tab",
+          "frequency": "0 - 1 - 0",
+          "timing": "After Lunch",
+          "duration": "30 Days",
+          "instructions": "Daily preventive wellness"
+        }
+      ],
+      "billing": {
+        "totalAmount": "₹ 0.00 (Free Government Enrollment)",
+        "insuranceScheme": "Chief Minister's Comprehensive Health Insurance Scheme (CMCHIS)",
+        "schemeApproved": "100% Cashless Coverage Active",
+        "patientPayable": "₹ 0.00 (Free of Cost)",
+        "paymentStatus": "Approved via Government Scheme"
+      },
+      "followUp": "Visit nearest Government Primary Health Centre (PHC) or Hospital for annual checkup."
+    }
+  ],
+  "doctors": [
+    {
+      "id": "DOC-101",
+      "regNo": "TMC-48291",
+      "pin": "1234",
+      "name": "Dr. S. K. Aravind",
+      "degrees": "MD, DM (Cardiology), FACC",
+      "designation": "Chief Consultant Cardiologist & HOD",
+      "department": "Cardiology",
+      "hospital": "Govt Multi Super Speciality Hospital, Omandurar, Chennai",
+      "phone": "+91 94440 88990",
+      "opdRoom": "Room 104, Block-A",
+      "isOnline": true,
+      "todayQueue": [
+        {
+          "token": 1,
+          "receiptId": "TN-REC-8841",
+          "patientName": "Karthikeyan Subramanian",
+          "age": 48,
+          "status": "Review Completed",
+          "type": "Post-Discharge Follow-up"
+        },
+        {
+          "token": 2,
+          "receiptId": "TN-REC-9102",
+          "patientName": "M. Anbazhagan",
+          "age": 54,
+          "status": "Waiting in Queue",
+          "type": "New Consultation - Chest Discomfort"
+        },
+        {
+          "token": 3,
+          "receiptId": "TN-REC-9144",
+          "patientName": "Revathi Natarajan",
+          "age": 60,
+          "status": "In Waiting Area",
+          "type": "BP Fluctuation Review"
+        }
+      ]
+    },
+    {
+      "id": "DOC-102",
+      "regNo": "TMC-52190",
+      "pin": "1234",
+      "name": "Dr. Meenakshi Sundaram",
+      "degrees": "MD (General Med), DM (Endocrinology)",
+      "designation": "Senior Consultant Endocrinologist",
+      "department": "Endocrinology & Diabetology",
+      "hospital": "Govt Rajaji Hospital & Pan-India Medical Centre, Madurai",
+      "phone": "+91 94433 77112",
+      "opdRoom": "Room 208, OPD Tower",
+      "isOnline": true,
+      "todayQueue": [
+        {
+          "token": 1,
+          "receiptId": "TN-REC-4920",
+          "patientName": "Priya Ramanathan",
+          "age": 34,
+          "status": "Attending Now",
+          "type": "Diabetes Evaluation"
+        },
+        {
+          "token": 2,
+          "receiptId": "TN-REC-9311",
+          "patientName": "Venkatesh Rao",
+          "age": 58,
+          "status": "Waiting in Queue",
+          "type": "HbA1c Quarterly Review"
+        }
+      ]
+    }
+  ],
+  "videoRooms": {
+    "ROOM_TNREC8841": {
+      "roomId": "ROOM_TNREC8841",
+      "receiptId": "TN-REC-8841",
+      "patientName": "Karthikeyan Subramanian",
+      "doctorName": "Dr. S. K. Aravind",
+      "doctorRegNo": "TMC-48291",
+      "created": "2026-09-09T16:43:08.610Z",
+      "status": "Active",
+      "participants": {
+        "patient": {
+          "joinedAt": "2026-09-09T17:58:44.488Z",
+          "online": true
+        }
+      }
+    },
+    "ROOM_TNREC4920": {
+      "roomId": "ROOM_TNREC4920",
+      "receiptId": "TN-REC-4920",
+      "patientName": "Priya Ramanathan",
+      "doctorName": "Dr. Meenakshi Sundaram, MD (General Medicine), DM (Endo)",
+      "doctorRegNo": "TMC-52190",
+      "created": "2026-09-09T16:43:41.694Z",
+      "status": "Active",
+      "participants": {
+        "patient": {
+          "joinedAt": "2026-09-09T16:43:41.694Z",
+          "online": true
+        }
+      }
+    },
+    "ROOM_TNREC9012": {
+      "roomId": "ROOM_TNREC9012",
+      "receiptId": "TN-REC-9012",
+      "patientName": "Priya Ramanathan",
+      "doctorName": "Dr. Radhika Sundaram, MS, MCh",
+      "doctorRegNo": "TMC-39182",
+      "created": "2026-09-09T17:50:42.076Z",
+      "status": "Active",
+      "participants": {
+        "patient": {
+          "joinedAt": "2026-09-09T17:57:48.265Z",
+          "online": true
+        }
+      }
+    },
+    "ROOM_APT3492": {
+      "roomId": "ROOM_APT3492",
+      "receiptId": "TN-REC-8841",
+      "patientName": "Karthikeyan Subramanian",
+      "doctorName": "Dr. S. K. Aravind, MD, DM",
+      "doctorRegNo": "TMC-48291",
+      "created": "2026-09-09T17:58:09.174Z",
+      "status": "Active",
+      "participants": {}
+    },
+    "ROOM_APT9164": {
+      "roomId": "ROOM_APT9164",
+      "receiptId": "TN-REC-8841",
+      "patientName": "Karthikeyan Subramanian",
+      "doctorName": "Dr. S. K. Aravind, MD, DM",
+      "doctorRegNo": "TMC-48291",
+      "created": "2026-09-09T17:58:44.481Z",
+      "status": "Active",
+      "participants": {}
+    }
+  },
+  "appointments": [
+    {
+      "id": "APT-9164",
+      "patientId": "P-1001",
+      "patientName": "Karthikeyan Subramanian",
+      "receiptId": "TN-REC-8841",
+      "abhaId": "14-9923-4512-7801",
+      "phone": "+91 98401 23456",
+      "department": "Cardiology",
+      "issueDescription": "Severe shortness of breath and heaviness in left arm after climbing stairs",
+      "requestedDate": "2026-09-15",
+      "requestedTime": "11:30 AM - 12:00 PM",
+      "status": "Confirmed",
+      "doctorName": "Dr. S. K. Aravind, MD, DM",
+      "doctorRegNo": "TMC-48291",
+      "confirmedTime": "2026-09-15 at 11:30 AM",
+      "roomId": "ROOM_APT9164",
+      "createdAt": "2026-09-09T17:58:44.463Z"
+    },
+    {
+      "id": "APT-3492",
+      "patientId": "patient_1",
+      "patientName": "Karthikeyan Subramanian",
+      "receiptId": "TN-REC-8841",
+      "abhaId": "91-4820-1940-2819",
+      "phone": "9840123456",
+      "department": "Cardiology",
+      "issueDescription": "Palpitations and shortness of breath after climbing stairs",
+      "requestedDate": "2026-09-12",
+      "requestedTime": "10:30 AM - 11:00 AM",
+      "status": "Confirmed",
+      "doctorName": "Dr. S. K. Aravind, MD, DM",
+      "doctorRegNo": "TMC-48291",
+      "confirmedTime": "2026-09-12 at 10:30 AM",
+      "roomId": "ROOM_APT3492",
+      "createdAt": "2026-09-09T17:58:09.159Z"
+    }
+  ]
+}

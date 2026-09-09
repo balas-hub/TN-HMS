@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamil Nadu Health Care • Doctor Clinical OPD Workbench & EMR</title>
+  <meta name="description" content="Official Doctor & Specialist Clinical Portal. Government of Tamil Nadu Health & Family Welfare Department. Manage OPD queue, patient EMR, electronic prescriptions, and live teleconsultations.">
+  <link rel="icon" type="image/webp" href="/Tamil_Nadu.webp">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Base64 Logo Data (Guarantees 100% immediate render without network latency) -->
+  <script src="js/logo-data.js"></script>
+
+  <!-- React 18 & ReactDOM 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel Standalone for In-Browser JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body style="background-color: #F8FAFC; min-height: 100vh;">
+  <!-- React Mount Point -->
+  <div id="doctor-root">
+    <div style="padding: 80px 20px; text-align: center; color: #0F172A; font-family: sans-serif;">
+      <img src="/Tamil_Nadu.webp" alt="Tamil Nadu Government Logo" style="width: 72px; height: 72px; margin-bottom: 16px;" onerror="this.src=window.TN_EMBLEM_DATA_URL" />
+      <h2 style="color: #046A38; font-weight: 800;">தமிழ்நாடு அரசு • மக்கள் நல்வாழ்வுத்துறை</h2>
+      <h3 style="color: #0F172A; margin-top: 4px;">Doctor Clinical OPD Workbench & EMR</h3>
+      <p style="color: #64748B; margin-top: 8px;">Initializing Medical Council Secure Physician Session...</p>
+    </div>
+  </div>
+
+  <!-- Dedicated Doctor Application Logic -->
+  <script type="text/babel" src="js/doctor-page.jsx"></script>
+</body>
+</html>

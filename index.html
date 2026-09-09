@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamil Nadu Health Care & Pan-India Medical Centre | Unified Patient Portal</title>
+  <meta name="description" content="Official Tamil Nadu Health Care and Pan-India Medical Centre portal. Search patient records by Receipt ID or ABHA ID, access patient health lockers, and doctor clinical workbench.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+
+  <!-- 2. OFFICIAL MAIN HEADER & NAVIGATION -->
+  <header class="main-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-wrapper">
+        <!-- Tamil Nadu Emblem Inspired Gopuram Crest SVG -->
+        <div class="emblem-icon" title="Government of Tamil Nadu Emblem">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#006A4E" stroke-width="4" fill="#FFFFFF"/>
+            <!-- Traditional Temple Gopuram Silhouette -->
+            <path d="M50 14L54 26H46L50 14Z" fill="#D97706"/>
+            <path d="M43 26H57L59 38H41L43 26Z" fill="#006A4E"/>
+            <path d="M38 38H62L65 52H35L38 38Z" fill="#006A4E"/>
+            <path d="M33 52H67L71 68H29L33 52Z" fill="#006A4E"/>
+            <rect x="25" y="68" width="50" height="12" rx="2" fill="#D97706"/>
+            <!-- Gate arch -->
+            <path d="M44 80V68C44 64.7 46.7 62 50 62C53.3 62 56 64.7 56 68V80H44Z" fill="#FFFFFF"/>
+            <!-- Saffron Star Accents -->
+            <circle cx="28" cy="30" r="3" fill="#D97706"/>
+            <circle cx="72" cy="30" r="3" fill="#D97706"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-tamil tamil-font">தமிழ்நாடு அரசு • மக்கள் நல்வாழ்வுத்துறை</span>
+          <span class="brand-title">Tamil Nadu Health Care</span>
+          <span class="brand-subtitle">Pan-India Medical Centre & Multi Super Speciality Network</span>
+        </div>
+      </a>
+
+      <!-- Navigation Menu -->
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#hero-search" class="nav-link active">Home</a></li>
+        <li><a href="#record-result-section" class="nav-link" onclick="scrollToSection('record-result-section')">Patient Records</a></li>
+        <li><a href="#pan-india-section" class="nav-link" onclick="scrollToSection('pan-india-section')">Pan-India Network</a></li>
+        <li><a href="#specialties-section" class="nav-link" onclick="scrollToSection('specialties-section')">Specialties</a></li>
+      </ul>
+
+      <!-- CTA Action Buttons -->
+      <div class="nav-cta-group">
+        <button class="btn btn-primary" onclick="window.AuthEngine.openClientPortal()" id="btn-patient-portal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Client Login
+        </button>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO & SEARCH SECTION -->
+  <section class="hero-section" id="hero-search">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Hero Introduction -->
+        <div class="hero-content">
+
+          <h1>
+            Tamil Nadu Healthcare & <br>
+            <span class="highlight">Pan-India Medical Centre</span>
+          </h1>
+
+          <p class="hero-lead">
+            A state-of-the-art tertiary care and unified health records portal connecting patients, clinicians, and government multi-super speciality medical colleges across Tamil Nadu and apex institutions nationwide.
+          </p>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="scrollToSection('record-result-section')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              Lookup Patient Record
+            </button>
+            <button class="btn btn-outline" onclick="window.AuthEngine.openClientPortal()">
+              Patient Health Locker
+            </button>
+            <button class="btn btn-outline" onclick="window.AuthEngine.openDoctorPortal()">
+              Doctor OPD Workbench
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Patient Record Search Card (User Core Requirement) -->
+        <div>
+          <div class="search-card-hero">
+            <div class="search-header">
+              <h2>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006A4E" stroke-width="2.5">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                Patient Record Verification
+              </h2>
+            </div>
+
+            <p style="font-size: 13px; color: #475569; margin-bottom: 14px;">
+              Enter your hospital <strong>Receipt ID</strong> or 14-digit <strong>ABHA / ABHI ID</strong> to immediately retrieve diagnostics, vitals, doctor notes, and digital prescriptions.
+            </p>
+
+            <div class="search-input-group">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input 
+                type="text" 
+                id="patient-search-input" 
+                placeholder="Enter Receipt ID or 14-digit ABHA ID"
+              >
+            </div>
+
+            <div class="search-hint">
+              <span>Supports: Hospital Receipt, Discharge Number, ABHA Address</span>
+              <button class="btn btn-primary" style="padding: 8px 18px;" onclick="window.RecordEngine.search(document.getElementById('patient-search-input').value)">
+                Search Record
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PATIENT RECORD RESULT VIEW (DYNAMICALLY POPULATED) -->
+  <section class="record-result-section" id="record-result-section" style="display: none;">
+    <div class="container">
+      <div class="section-head" style="margin-bottom: 24px;">
+        <span class="section-tag">OFFICIAL CLINICAL RECORD SYSTEM</span>
+        <h2 class="section-title">Verified Patient Medical Record</h2>
+        <p class="section-sub">Digital clinical case sheet, laboratory diagnostics, and certified pharmacotherapy regimen.</p>
+      </div>
+
+      <div id="record-display-target">
+        <!-- Javascript renders full patient summary here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PAN-INDIA MEDICAL CENTRES & INTER-STATE NETWORK -->
+  <section class="section-padding" id="pan-india-section" style="background: #F8FAFC; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">HEALTHCARE INFRASTRUCTURE</span>
+        <h2 class="section-title">Tamil Nadu & Pan-India Medical Network</h2>
+        <p class="section-sub">Comprehensive multi-super speciality tertiary hospitals, medical college hospitals, and inter-state patient facilitation desks.</p>
+      </div>
+
+      <div class="centres-grid" id="pan-india-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CLINICAL SPECIALTIES -->
+  <section class="section-padding" id="specialties-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">CENTRES OF CLINICAL EXCELLENCE</span>
+        <h2 class="section-title">Tertiary Super Speciality Departments</h2>
+        <p class="section-sub">Round-the-clock emergency, advanced diagnostic imaging, and cutting-edge surgical infrastructure.</p>
+      </div>
+
+      <div class="specialties-grid">
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Cardiology & CTVS</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Neurology & Neuro Surgery</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Medical & Surgical Oncology</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M12 8v8M8 12h8"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Orthopaedics & Joint Replacement</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12A10 10 0 0 1 12 2z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Endocrinology & Diabetology</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Emergency & Level-1 Trauma</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Nephrology & Renal Transplant</div>
+        </div>
+
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
+            </svg>
+          </div>
+          <div class="specialty-name">Pediatrics & Neonatal Care</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODALS: CLIENT / PATIENT PORTAL & DOCTOR CLINICAL WORKBENCH
+       ========================================================================= -->
+
+  <!-- Client / Patient Modal -->
+  <div class="modal-overlay" id="client-portal-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#006A4E" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Client & Patient Health Locker
+        </h3>
+        <button class="close-btn" onclick="window.AuthEngine.closeClientPortal()" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="client-modal-body">
+        <!-- Populated dynamically by auth.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Doctor / Staff Modal -->
+  <div class="modal-overlay" id="doctor-portal-modal">
+    <div class="modal-window large">
+      <div class="modal-header">
+        <h3>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          Doctor & Specialist Clinical Workbench
+        </h3>
+        <button class="close-btn" onclick="window.AuthEngine.closeDoctorPortal()" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="doctor-modal-body">
+        <!-- Populated dynamically by doctor.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Mount -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- 7. SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Tamil Nadu Health Care & Pan-India Medical Centre</h4>
+          <p>
+            An initiative under the Department of Health and Family Welfare, Government of Tamil Nadu, integrating tertiary care hospitals with the national digital health ecosystem.
+          </p>
+          <div style="font-size: 12px; color: #64748B;">
+            National Health Authority (NHA) • ABDM Ayushman Bharat Digital Mission • CMCHIS Health Scheme
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Emergency Hotlines</h5>
+          <ul class="footer-links">
+            <li><a href="tel:108">108 - Emergency Ambulance</a></li>
+            <li><a href="tel:104">104 - Medical Advisory</a></li>
+            <li><a href="tel:14416">14416 - Tele-MANAS (Mental Health)</a></li>
+            <li><a href="tel:18004253993">1800-425-3993 - CMCHIS Insurance</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Apex Hospitals</h5>
+          <ul class="footer-links">
+            <li><a href="#pan-india-section">Govt Multi Super Speciality, Chennai</a></li>
+            <li><a href="#pan-india-section">Government Rajaji Hospital, Madurai</a></li>
+            <li><a href="#pan-india-section">Coimbatore Medical College Hospital</a></li>
+            <li><a href="#pan-india-section">Pan-India Referral Liaison Cell</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Portals & Services</h5>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="scrollToSection('record-result-section')">Patient Record Verification</a></li>
+            <li><a href="javascript:void(0)" onclick="window.AuthEngine.openClientPortal()">Client Health Locker</a></li>
+            <li><a href="javascript:void(0)" onclick="window.AuthEngine.openDoctorPortal()">Doctor OPD Workbench</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('ABHA registration enabled via ABDM')">Create New ABHA ID</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Tamil Nadu Health & Family Welfare Department • Pan-India Medical Centre Network. All Rights Reserved.
+        </div>
+        <div>
+          White Window Standard • Government of Tamil Nadu Digital Services
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/records.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/doctor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
