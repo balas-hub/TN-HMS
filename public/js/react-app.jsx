@@ -2464,21 +2464,21 @@ function VideoConsultationModal({ room, onClose, onToast }) {
                   </svg>
                 )}
               </div>
-              <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '4px' }}>
-                {room.role === 'patient' ? (room.doctorName || 'Dr. S. K. Aravind, MD, DM') : (room.patientName || 'Karthikeyan Subramanian')}
+              <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '6px', color: '#FFFFFF' }}>
+                {room.role === 'patient' ? (room.doctorName || 'Attending Physician') : (room.patientName || 'Registered Patient')}
               </h3>
-              <p style={{ fontSize: '13.5px', color: '#94A3B8', maxWidth: '420px' }}>
+              <p style={{ fontSize: '13.5px', color: '#94A3B8', maxWidth: '440px', lineHeight: '1.5', margin: '0 auto' }}>
                 {room.role === 'patient'
-                  ? 'Chief Consultant Cardiologist • Government Multi Super Speciality Hospital, Omandurar, Chennai'
-                  : 'Patient Receipt: ' + (room.receiptId || 'TN-REC-8841') + ' • Age: 48 • O +ve'
+                  ? (room.department ? `${room.department} Consultation` : 'Specialist Tele-Consultation')
+                  : (room.receiptId ? `Receipt ID: ${room.receiptId}` : 'Patient Consultation')
                 }
               </p>
-              <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', marginTop: '16px' }}>
                 <span style={{ background: 'rgba(15, 76, 129, 0.3)', border: '1px solid var(--primary)', color: '#38BDF8', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
-                  HD 1080p Encrypted
+                  Encrypted HD Video Session
                 </span>
-                <span style={{ background: 'rgba(217, 119, 6, 0.2)', border: '1px solid var(--tn-gold)', color: 'var(--tn-gold)', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
-                  Ayushman Bharat Verified
+                <span style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10B981', color: '#34D399', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
+                  Active Tele-OPD Feed
                 </span>
               </div>
             </div>
@@ -2487,14 +2487,15 @@ function VideoConsultationModal({ room, onClose, onToast }) {
               {localStream && !isVideoOff ? (
                 <video ref={localVideoRef} autoPlay playsInline muted />
               ) : (
-                <div className="pip-fallback-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#FFFFFF', fontSize: '12px' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <div className="pip-fallback-avatar" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px', color: '#94A3B8', fontSize: '12px' }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="7" r="4"/>
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                   </svg>
-                  <span>{room.role === 'patient' ? 'Patient Video' : 'Doctor Video'}</span>
+                  <span style={{ fontSize: '11px' }}>Camera Off</span>
                 </div>
               )}
+              <span className="pip-label">{room.role === 'patient' ? 'You (Patient)' : 'You (Doctor)'}</span>
             </div>
           </div>
 
@@ -2507,17 +2508,25 @@ function VideoConsultationModal({ room, onClose, onToast }) {
             </div>
 
             <div className="in-call-card">
-              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '2px' }}>CONSULTATION SESSION</div>
-              <strong>Room ID:</strong> <code>{room.roomId || 'ROOM_8841'}</code><br/>
-              <strong>Patient:</strong> {room.patientName || 'Karthikeyan Subramanian'}<br/>
-              <strong>Receipt:</strong> {room.receiptId || 'TN-REC-8841'}
+              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '4px', fontWeight: '700' }}>SESSION DETAILS</div>
+              <div style={{ fontSize: '12px', lineHeight: '1.6' }}>
+                <div><span style={{ color: '#94A3B8' }}>Room ID:</span> <code style={{ color: '#38BDF8' }}>{room.roomId || room.appointmentId || 'ACTIVE-CALL'}</code></div>
+                {room.doctorName && <div><span style={{ color: '#94A3B8' }}>Doctor:</span> <strong>{room.doctorName}</strong></div>}
+                {room.patientName && <div><span style={{ color: '#94A3B8' }}>Patient:</span> <strong>{room.patientName}</strong></div>}
+                {room.receiptId && <div><span style={{ color: '#94A3B8' }}>Receipt:</span> <strong>{room.receiptId}</strong></div>}
+                {room.department && <div><span style={{ color: '#94A3B8' }}>Department:</span> {room.department}</div>}
+              </div>
             </div>
 
             <div className="in-call-card">
-              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '2px' }}>PATIENT VITALS ON RECORD</div>
-              BP: <strong>128/84 mmHg</strong><br/>
-              Pulse: <strong>74 bpm</strong> | SpO2: <strong>99%</strong><br/>
-              Diagnosis: <strong style={{ color: '#38BDF8' }}>Ischemic Heart Disease</strong>
+              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '4px', fontWeight: '700' }}>CONSULTATION NOTES</div>
+              {room.issueDescription ? (
+                <div style={{ fontSize: '12.5px', color: '#F1F5F9', lineHeight: '1.5', background: 'rgba(15, 23, 42, 0.6)', padding: '8px', borderRadius: '6px', border: '1px solid #334155' }}>
+                  "{room.issueDescription}"
+                </div>
+              ) : (
+                <div style={{ fontSize: '12px', color: '#94A3B8' }}>Live tele-consultation session active.</div>
+              )}
             </div>
 
             <div style={{ marginTop: 'auto' }}>

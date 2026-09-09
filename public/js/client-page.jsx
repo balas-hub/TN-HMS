@@ -43,9 +43,7 @@ function VideoConsultationModal({ room, onClose, onToast }) {
   const [isVideoOff, setIsVideoOff] = useState(false);
   const [callSeconds, setCallSeconds] = useState(0);
   const [patientChat, setPatientChat] = useState('');
-  const [chatMessages, setChatMessages] = useState([
-    { sender: 'Specialist Doctor', text: 'Namaskaram. Please explain your symptoms.' }
-  ]);
+  const [chatMessages, setChatMessages] = useState([]);
   const [localStream, setLocalStream] = useState(null);
   const localVideoRef = useRef(null);
 
@@ -107,7 +105,7 @@ function VideoConsultationModal({ room, onClose, onToast }) {
 
   return (
     <div className="modal-overlay" style={{ zIndex: 1200 }}>
-      <div className="video-modal-window">
+      <div className="video-consult-window">
         <div className="video-consult-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img src={LOGO_SRC} alt="Emblem" style={{ width: '36px', height: '36px' }} />
@@ -117,7 +115,7 @@ function VideoConsultationModal({ room, onClose, onToast }) {
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <h3 style={{ fontSize: '17px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>
-                  Consultation with {room.doctorName || 'Specialist Doctor'}
+                  Consultation with {room.doctorName || 'Assigned Doctor'}
                 </h3>
                 <span className="video-status-indicator">
                   <span className="status-dot-pulse"></span>
@@ -143,18 +141,19 @@ function VideoConsultationModal({ room, onClose, onToast }) {
                   <circle cx="12" cy="7" r="4"/>
                 </svg>
               </div>
-              <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '4px', color: '#FFFFFF' }}>
-                {room.doctorName || 'Dr. S. K. Aravind, MD, DM'}
+              <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '6px', color: '#FFFFFF' }}>
+                {room.doctorName || 'Attending Physician'}
               </h3>
-              <p style={{ fontSize: '13.5px', color: '#94A3B8', maxWidth: '420px' }}>
-                Senior Cardiologist • Reg: {room.doctorRegNo || 'TMC-48291'} • Apex Tele-OPD
+              <p style={{ fontSize: '13.5px', color: '#94A3B8', maxWidth: '440px', lineHeight: '1.5', margin: '0 auto' }}>
+                {room.department ? `${room.department} Consultation` : 'Specialist Tele-Consultation'}
+                {room.doctorRegNo ? ` • Reg: ${room.doctorRegNo}` : ''}
               </p>
-              <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', marginTop: '16px' }}>
                 <span style={{ background: 'rgba(15, 76, 129, 0.3)', border: '1px solid var(--primary)', color: '#38BDF8', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
-                  Secure 1080p Encrypted Feed
+                  Encrypted HD Video Session
                 </span>
-                <span style={{ background: 'rgba(217, 119, 6, 0.2)', border: '1px solid var(--tn-gold)', color: 'var(--tn-gold)', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
-                  ABDM Verified Tele-Session
+                <span style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10B981', color: '#34D399', padding: '4px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: '700' }}>
+                  Active Tele-OPD Feed
                 </span>
               </div>
             </div>
@@ -163,14 +162,15 @@ function VideoConsultationModal({ room, onClose, onToast }) {
               {localStream && !isVideoOff ? (
                 <video ref={localVideoRef} autoPlay playsInline muted />
               ) : (
-                <div className="pip-fallback-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#FFFFFF', fontSize: '12px' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="pip-fallback-avatar" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px', color: '#94A3B8', fontSize: '12px' }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="7" r="4"/>
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                   </svg>
-                  <span>Your Camera</span>
+                  <span style={{ fontSize: '11px' }}>Camera Off</span>
                 </div>
               )}
+              <span className="pip-label">You (Patient)</span>
             </div>
           </div>
 
@@ -184,10 +184,19 @@ function VideoConsultationModal({ room, onClose, onToast }) {
             </div>
 
             <div className="in-call-card">
-              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '2px' }}>SECURE ROOM ID</div>
-              <code>{room.roomId || 'ROOM_TELE_01'}</code><br/>
-              <strong>Specialist:</strong> {room.doctorName || 'Dr. S. K. Aravind'}<br/>
-              <strong>Patient:</strong> {room.patientName || 'Citizen'}
+              <div style={{ color: '#94A3B8', fontSize: '11px', marginBottom: '4px', fontWeight: '700' }}>SESSION DETAILS</div>
+              <div style={{ fontSize: '12px', lineHeight: '1.6' }}>
+                <div><span style={{ color: '#94A3B8' }}>Room ID:</span> <code style={{ color: '#38BDF8' }}>{room.roomId || room.appointmentId || 'TELE-SESSION'}</code></div>
+                {room.doctorName && <div><span style={{ color: '#94A3B8' }}>Doctor:</span> <strong>{room.doctorName}</strong></div>}
+                {room.patientName && <div><span style={{ color: '#94A3B8' }}>Patient:</span> <strong>{room.patientName}</strong></div>}
+                {room.department && <div><span style={{ color: '#94A3B8' }}>Department:</span> {room.department}</div>}
+                {room.issueDescription && (
+                  <div style={{ marginTop: '6px', borderTop: '1px dashed #334155', paddingTop: '6px' }}>
+                    <span style={{ color: '#94A3B8', fontSize: '11px' }}>Health Issue:</span>
+                    <div style={{ color: '#F8FAFC', fontStyle: 'italic', marginTop: '2px' }}>"{room.issueDescription}"</div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
@@ -195,12 +204,18 @@ function VideoConsultationModal({ room, onClose, onToast }) {
                 Consultation Message Thread:
               </div>
               <div style={{ flex: 1, background: '#0B1329', border: '1px solid #1E293B', borderRadius: '8px', padding: '10px', overflowY: 'auto', maxHeight: '180px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {chatMessages.map((msg, i) => (
-                  <div key={i} style={{ fontSize: '12px' }}>
-                    <strong style={{ color: msg.sender === 'You' ? '#38BDF8' : '#34D399' }}>{msg.sender}: </strong>
-                    <span style={{ color: '#F1F5F9' }}>{msg.text}</span>
+                {chatMessages.length === 0 ? (
+                  <div style={{ color: '#64748B', fontSize: '12px', textAlign: 'center', margin: 'auto', fontStyle: 'italic', padding: '16px 8px' }}>
+                    Consultation chat is ready. Send a message to communicate with the doctor.
                   </div>
-                ))}
+                ) : (
+                  chatMessages.map((msg, i) => (
+                    <div key={i} style={{ fontSize: '12px', wordBreak: 'break-word' }}>
+                      <strong style={{ color: msg.sender === 'You' ? '#38BDF8' : '#34D399' }}>{msg.sender}: </strong>
+                      <span style={{ color: '#F1F5F9' }}>{msg.text}</span>
+                    </div>
+                  ))
+                )}
               </div>
               <form onSubmit={handleSendChat} style={{ display: 'flex', gap: '6px', marginTop: '8px' }}>
                 <input 
@@ -602,7 +617,7 @@ function PatientLoginGate({ onLoginSuccess, onToast }) {
                   style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '14px' }}
                 />
                 <span style={{ fontSize: '11.5px', color: '#64748B', marginTop: '4px', display: 'block' }}>
-                  Demo verified patient: <code>TN-REC-8841</code> (Karthikeyan Subramanian)
+                  Enter your OPD Receipt ID (e.g. <code>TN-REC-8841</code>) or registered 10-digit mobile number
                 </span>
               </div>
 
