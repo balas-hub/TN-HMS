@@ -16,9 +16,9 @@ function renderDoctorWorkbench(doctor) {
     <!-- Doctor Profile Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E2E8F0; padding-bottom: 14px; margin-bottom: 16px;">
       <div>
-        <span style="font-size: 11px; font-weight: 700; color: #006A4E; text-transform: uppercase;">OPD CLINICAL WORKBENCH</span>
+        <span style="font-size: 11px; font-weight: 700; color: #006A4E; text-transform: uppercase;">TAMIL NADU MEDICAL COUNCIL</span>
         <h3 style="font-size: 18px; font-weight: 800; color: #0F172A; margin: 2px 0;">${escapeHtml(doctor.name)}</h3>
-        <p style="font-size: 12.5px; color: #64748B;">${escapeHtml(doctor.degrees)} | Reg: <strong>${escapeHtml(doctor.regNo)}</strong> | ${escapeHtml(doctor.opdRoom)}</p>
+        <p style="font-size: 12.5px; color: #0D9488; font-weight: 600;">${escapeHtml(doctor.degrees || 'MD (Gen Med), DM (Cardiology), FACC')}</p>
       </div>
       <div>
         <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="window.AuthEngine.handleDoctorLogout()">Sign Out</button>

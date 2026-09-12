@@ -407,13 +407,195 @@ function DoctorLoginGate({ onLoginSuccess, onToast }) {
   );
 }
 
+const INITIAL_CARDIOLOGY_PATIENTS = [
+  {
+    id: 'p-101',
+    tokenNum: '01',
+    name: 'Karthikeyan Subramanian',
+    initials: 'KS',
+    receiptId: 'TN-REC-8841',
+    abhaId: '14-9923-4512-7801',
+    age: 48,
+    gender: 'Male',
+    bloodGroup: 'O +ve',
+    isUrgent: true,
+    status: 'In Clinic',
+    hasUrgentBorder: false,
+    diagnosis: 'Ischemic Heart Disease (Mild CAD) - Stabilized, Essential Hypertension (Stage 1)',
+    clinicalNotes: 'Patient presented with atypical chest pain on exertion. Troponin T negative. 2D Echo showed normal LV systolic function (LVEF 58%). Coronary angiography showed single vessel 40% stenosis in mid-LAD, managed medically. Hemodynamically stable upon discharge.',
+    followUp: '18-Sep-2026 at Cardiology OPD, Room 104',
+    vitals: { bp: '130/84 mmHg', pulse: '74 bpm', spo2: '99%', temp: '98.4 °F', bloodSugarFasting: '102 mg/dL', bmi: '24.2', weight: '72 kg' },
+    prescriptions: [
+      { medicine: 'Tab. Telmisartan', dosage: '40 mg', frequency: '1 - 0 - 0', timing: 'After Food', duration: '30 Days' },
+      { medicine: 'Tab. Atorvastatin', dosage: '20 mg', frequency: '0 - 0 - 1', timing: 'After Dinner', duration: '30 Days' },
+      { medicine: 'Tab. Aspirin (Ecosprin)', dosage: '75 mg', frequency: '0 - 1 - 0', timing: 'After Lunch', duration: '30 Days' },
+      { medicine: 'Tab. Metoprolol Succinate', dosage: '25 mg', frequency: '1 - 0 - 0', timing: 'After Breakfast', duration: '30 Days' }
+    ],
+    labReports: [
+      { testName: 'High Sensitivity Troponin T (hs-cTnT)', date: '08-Sep-2026', result: '< 0.014 ng/mL', normalRange: '< 0.014 ng/mL', status: 'Normal' },
+      { testName: 'Lipid Profile - Total Cholesterol', date: '08-Sep-2026', result: '178 mg/dL', normalRange: '125 - 200 mg/dL', status: 'Optimal' },
+      { testName: '12-Lead Electrocardiogram (ECG)', date: '08-Sep-2026', result: 'Normal Sinus Rhythm, No ST-T changes', normalRange: 'Normal Sinus Rhythm', status: 'Normal' },
+      { testName: '2D Echocardiography (Echo)', date: '07-Sep-2026', result: 'LVEF 58%, No regional wall motion abnormality', normalRange: 'LVEF 55 - 70%', status: 'Normal' },
+      { testName: 'Coronary Angiogram (CAG)', date: '06-Sep-2026', result: 'Single vessel mild disease (40% mid-LAD)', normalRange: 'No obstructive lesions', status: 'Evaluated' }
+    ],
+    pastRecords: [
+      { id: 'REC-01', title: 'Cardiology Discharge Summary', date: '08-Sep-2026', hospital: 'Govt Multi Super Speciality Hospital, Omandurar', type: 'Discharge Summary' },
+      { id: 'REC-02', title: 'Hypertension Staging Consultation Note', date: '14-Jun-2026', hospital: 'Rajiv Gandhi Govt General Hospital, Chennai', type: 'OPD Note' },
+      { id: 'REC-03', title: 'Preventive Cardiology Screening', date: '10-Jan-2026', hospital: 'Govt Stanley Medical College Hospital', type: 'Health Check' }
+    ],
+    oldReceipts: [
+      { receiptNo: 'TN-REC-8841', date: '05-Sep-2026', department: 'Cardiology Super-Speciality', fee: '₹ 0 (CMCHIS Free Scheme)' },
+      { receiptNo: 'TN-REC-5512', date: '14-Jun-2026', department: 'General Medicine OPD', fee: '₹ 0 (Govt Free OPD)' },
+      { receiptNo: 'TN-REC-3209', date: '10-Jan-2026', department: 'Preventive Health Check', fee: '₹ 0 (Govt Free OPD)' }
+    ]
+  },
+  {
+    id: 'p-102',
+    tokenNum: '02',
+    name: 'Priya Ramanathan',
+    initials: 'PR',
+    receiptId: 'TN-REC-4920',
+    abhaId: '14-8832-9011-3421',
+    age: 34,
+    gender: 'Female',
+    bloodGroup: 'B +ve',
+    isUrgent: false,
+    status: 'Waiting',
+    hasUrgentBorder: false,
+    diagnosis: 'Type 2 Diabetes Mellitus (Newly Detected), Subclinical Hypothyroidism',
+    clinicalNotes: 'Routine endocrine review. Fasting blood glucose elevated (142 mg/dL). Thyroid profile indicates elevated TSH (6.2 uIU/mL). Advised dietary modifications, regular brisk walking, and started on Metformin 500mg BD.',
+    followUp: '25-Sep-2026 at Endocrinology OPD',
+    vitals: { bp: '118/76 mmHg', pulse: '78 bpm', spo2: '98%', temp: '98.6 °F', bloodSugarFasting: '142 mg/dL', bmi: '25.8', weight: '64 kg' },
+    prescriptions: [
+      { medicine: 'Tab. Metformin HCl', dosage: '500 mg', frequency: '1 - 0 - 1', timing: 'With Meals', duration: '30 Days' },
+      { medicine: 'Tab. Thyronorm', dosage: '25 mcg', frequency: '1 - 0 - 0', timing: 'Empty Stomach in Morning', duration: '30 Days' }
+    ],
+    labReports: [
+      { testName: 'HbA1c Glycated Hemoglobin', date: '10-Sep-2026', result: '7.4 %', normalRange: '< 5.7 %', status: 'Elevated' },
+      { testName: 'Serum TSH (Ultrasensitive)', date: '10-Sep-2026', result: '6.2 uIU/mL', normalRange: '0.4 - 4.2 uIU/mL', status: 'Elevated' },
+      { testName: 'Serum Creatinine', date: '10-Sep-2026', result: '0.8 mg/dL', normalRange: '0.6 - 1.1 mg/dL', status: 'Normal' }
+    ],
+    pastRecords: [
+      { id: 'REC-04', title: 'Annual Health Check Profile', date: '10-Sep-2026', hospital: 'Govt Multi Super Speciality Hospital, Omandurar', type: 'Lab Summary' }
+    ],
+    oldReceipts: [
+      { receiptNo: 'TN-REC-4920', date: '10-Sep-2026', department: 'Endocrinology OPD', fee: '₹ 0 (Free OPD)' }
+    ]
+  },
+  {
+    id: 'p-103',
+    tokenNum: '03',
+    name: 'Selvaraj Murugesan',
+    initials: 'SM',
+    receiptId: 'TN-REC-7731',
+    abhaId: '14-3451-8729-1102',
+    age: 62,
+    gender: 'Male',
+    bloodGroup: 'A +ve',
+    isUrgent: true,
+    status: 'Waiting',
+    hasUrgentBorder: true,
+    diagnosis: 'Right Knee Primary Osteoarthritis (Grade IV Kellgren-Lawrence) - Post Total Knee Arthroplasty (TKA)',
+    clinicalNotes: 'Post-operative week 3 review following Right TKA. Surgical wound healed cleanly with healthy scar formation. Active knee flexion measured at 95 degrees. Advised ongoing quadriceps strengthening and gait training.',
+    followUp: '02-Oct-2026 at Ortho Post-Op Clinic',
+    vitals: { bp: '138/88 mmHg', pulse: '76 bpm', spo2: '97%', temp: '98.2 °F', bloodSugarFasting: '110 mg/dL', bmi: '27.4', weight: '76 kg' },
+    prescriptions: [
+      { medicine: 'Tab. Paracetamol', dosage: '650 mg', frequency: '1 - 0 - 1', timing: 'After Food (SOS)', duration: '10 Days' },
+      { medicine: 'Tab. Calcium + Vitamin D3', dosage: '500 mg', frequency: '0 - 1 - 0', timing: 'After Lunch', duration: '60 Days' }
+    ],
+    labReports: [
+      { testName: 'Post-Op Digital X-Ray Right Knee (AP & Lat)', date: '04-Sep-2026', result: 'Prosthesis in optimal alignment, no loosening', normalRange: 'Anatomical Alignment', status: 'Normal' },
+      { testName: 'C-Reactive Protein (CRP)', date: '04-Sep-2026', result: '4.8 mg/L', normalRange: '< 5.0 mg/L', status: 'Normal' }
+    ],
+    pastRecords: [
+      { id: 'REC-05', title: 'Orthopaedic In-Patient Discharge Summary', date: '04-Sep-2026', hospital: 'Govt Multi Super Speciality Hospital, Omandurar', type: 'Discharge Summary' }
+    ],
+    oldReceipts: [
+      { receiptNo: 'TN-REC-7731', date: '01-Sep-2026', department: 'Orthopaedics & Joint Replacement', fee: '₹ 0 (CMCHIS Free Scheme)' }
+    ]
+  },
+  {
+    id: 'p-104',
+    tokenNum: '04',
+    name: 'Sundar Pichai',
+    initials: 'SP',
+    receiptId: 'TN-REC-2844',
+    abhaId: '14-1102-9938-4451',
+    age: 52,
+    gender: 'Male',
+    bloodGroup: 'O +ve',
+    isUrgent: false,
+    status: 'Waiting',
+    hasUrgentBorder: false,
+    diagnosis: 'Healthy Individual - Periodic Routine Evaluation Scheduled',
+    clinicalNotes: 'Annual executive cardiac health screening. Resting 12-lead ECG demonstrates normal sinus rhythm with physiological intervals. Lipid panel and renal markers all within ideal ranges. Encouraged daily 30-minute moderate aerobic exercise.',
+    followUp: '12-Mar-2027 at Executive Wellness OPD',
+    vitals: { bp: '122/80 mmHg', pulse: '68 bpm', spo2: '99%', temp: '98.4 °F', bloodSugarFasting: '92 mg/dL', bmi: '22.9', weight: '70 kg' },
+    prescriptions: [
+      { medicine: 'Tab. Multivitamin & Minerals', dosage: '1 Tab', frequency: '0 - 1 - 0', timing: 'After Lunch', duration: '30 Days' }
+    ],
+    labReports: [
+      { testName: 'Comprehensive Cardiac Executive Profile', date: '11-Sep-2026', result: 'All parameters normal, CAC score 0', normalRange: 'Normal', status: 'Normal' }
+    ],
+    pastRecords: [
+      { id: 'REC-06', title: 'Executive Wellness Report', date: '11-Sep-2026', hospital: 'Govt Multi Super Speciality Hospital, Omandurar', type: 'Annual Review' }
+    ],
+    oldReceipts: [
+      { receiptNo: 'TN-REC-2844', date: '11-Sep-2026', department: 'Executive Preventive OPD', fee: '₹ 0 (Govt Free OPD)' }
+    ]
+  },
+  {
+    id: 'p-105',
+    tokenNum: '05',
+    name: 'Meenakshi Sundaram',
+    initials: 'MS',
+    receiptId: 'TN-REC-6645',
+    abhaId: '14-7762-3341-9980',
+    age: 31,
+    gender: 'Female',
+    bloodGroup: 'AB +ve',
+    isUrgent: false,
+    status: 'Waiting',
+    hasUrgentBorder: false,
+    diagnosis: 'Pre-existing: Mild Asthma',
+    clinicalNotes: 'Complaints of intermittent seasonal cough and mild nocturnal wheezing during climatic shifts. Chest auscultation shows clear vesicular breath sounds with bilateral end-expiratory rhonchi. Metered dose inhaler technique demonstrated.',
+    followUp: '20-Oct-2026 at Pulmonary Medicine OPD',
+    vitals: { bp: '116/74 mmHg', pulse: '76 bpm', spo2: '98%', temp: '98.6 °F', bloodSugarFasting: '88 mg/dL', bmi: '21.8', weight: '56 kg' },
+    prescriptions: [
+      { medicine: 'Inhaler Budesonide + Formoterol', dosage: '200/6 mcg', frequency: '1 - 0 - 1', timing: 'Inhalation via Spacer (SOS)', duration: '60 Days' },
+      { medicine: 'Tab. Montelukast Sodium', dosage: '10 mg', frequency: '0 - 0 - 1', timing: 'At Bedtime', duration: '30 Days' }
+    ],
+    labReports: [
+      { testName: 'Pulmonary Function Spirometry (PFT)', date: '09-Sep-2026', result: 'Mild Reversible Airway Obstruction', normalRange: 'FEV1/FVC > 75%', status: 'Evaluated' }
+    ],
+    pastRecords: [
+      { id: 'REC-07', title: 'Pulmonology Consultation Summary', date: '09-Sep-2026', hospital: 'Govt Multi Super Speciality Hospital, Omandurar', type: 'OPD Note' }
+    ],
+    oldReceipts: [
+      { receiptNo: 'TN-REC-6645', date: '09-Sep-2026', department: 'Pulmonary OPD', fee: '₹ 0 (Govt Free OPD)' }
+    ]
+  }
+];
+
 function DoctorStandaloneApp() {
   const [doctorSession, setDoctorSession] = useState(() => {
     try {
       const saved = localStorage.getItem('tn_doctor_session');
-      return saved ? JSON.parse(saved) : null;
+      return saved ? JSON.parse(saved) : {
+        name: 'Dr. S. K. Aravind',
+        qualification: 'MD (Gen Med), DM (Cardiology), FACC',
+        department: 'Cardiology',
+        regNo: 'TMC-48291',
+        hospital: 'Government Multi Super Speciality Hospital, Omandurar, Chennai'
+      };
     } catch (e) {
-      return null;
+      return {
+        name: 'Dr. S. K. Aravind',
+        qualification: 'MD (Gen Med), DM (Cardiology), FACC',
+        department: 'Cardiology',
+        regNo: 'TMC-48291',
+        hospital: 'Government Multi Super Speciality Hospital, Omandurar, Chennai'
+      };
     }
   });
 
@@ -432,18 +614,41 @@ function DoctorStandaloneApp() {
     addToast('Doctor session ended successfully', 'info');
   };
 
-  const [queue, setQueue] = useState([]);
-  const [selectedQueuePatient, setSelectedQueuePatient] = useState(null);
-  const [activeWorkbenchTab, setActiveWorkbenchTab] = useState('notes');
+  const [queue, setQueue] = useState(INITIAL_CARDIOLOGY_PATIENTS);
+  const [selectedQueuePatient, setSelectedQueuePatient] = useState(INITIAL_CARDIOLOGY_PATIENTS[0]);
+  const [activeSideTab, setActiveSideTab] = useState('queue'); // 'queue' | 'schedules'
+  const [activeWorkbenchTab, setActiveWorkbenchTab] = useState('notes'); // 'notes' | 'vitals' | 'prescriptions' | 'labs' | 'past' | 'receipts'
+  const [searchQuery, setSearchQuery] = useState('');
   const [activeVideoRoom, setActiveVideoRoom] = useState(null);
   const [toasts, setToasts] = useState([]);
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState([
+    {
+      id: 'APT-101',
+      patientName: 'Karthikeyan Subramanian',
+      receiptId: 'TN-REC-8841',
+      department: 'Cardiology',
+      requestedDate: 'Today',
+      requestedTime: '12:30 PM',
+      issueDescription: 'Mild exertion tightness, request follow-up video review with Dr. Aravind.',
+      status: 'Pending'
+    },
+    {
+      id: 'APT-102',
+      patientName: 'Selvaraj Murugesan',
+      receiptId: 'TN-REC-7731',
+      department: 'Cardiology',
+      requestedDate: 'Today',
+      requestedTime: '01:15 PM',
+      issueDescription: 'Post-op knee swelling and blood pressure reading check.',
+      status: 'Pending'
+    }
+  ]);
 
   // Workbench Form State
-  const [diagnosis, setDiagnosis] = useState('');
-  const [clinicalNotes, setClinicalNotes] = useState('');
-  const [followUp, setFollowUp] = useState('');
-  const [prescriptions, setPrescriptions] = useState([]);
+  const [diagnosis, setDiagnosis] = useState(INITIAL_CARDIOLOGY_PATIENTS[0].diagnosis);
+  const [clinicalNotes, setClinicalNotes] = useState(INITIAL_CARDIOLOGY_PATIENTS[0].clinicalNotes);
+  const [followUp, setFollowUp] = useState(INITIAL_CARDIOLOGY_PATIENTS[0].followUp);
+  const [prescriptions, setPrescriptions] = useState(INITIAL_CARDIOLOGY_PATIENTS[0].prescriptions);
   const [newMed, setNewMed] = useState({ medicine: '', dosage: '', frequency: '1 - 0 - 0', timing: 'After Food', duration: '15 Days' });
 
   const addToast = useCallback((message, type = 'success') => {
@@ -454,123 +659,79 @@ function DoctorStandaloneApp() {
     }, 4000);
   }, []);
 
-  const fetchAppointments = useCallback(async () => {
-    if (!doctorSession) return;
-    try {
-      const dept = doctorSession.department || 'Cardiology';
-      const res = await fetch(`/api/appointments/doctor?department=${encodeURIComponent(dept)}&regNo=${encodeURIComponent(doctorSession.regNo)}`);
-      const data = await res.json();
-      if (data.success && data.appointments) {
-        setAppointments(data.appointments);
-      }
-    } catch (e) {}
-  }, [doctorSession]);
-
-  const fetchQueue = useCallback(async () => {
-    try {
-      const res = await fetch('/api/doctor/queue');
-      const data = await res.json();
-      if (data.success && data.queue) {
-        setQueue(data.queue);
-        if (!selectedQueuePatient && data.queue.length > 0) {
-          selectPatient(data.queue[0]);
-        }
-      }
-    } catch (e) {
-      // ignore
-    }
-  }, [selectedQueuePatient]);
-
   const selectPatient = (pt) => {
     setSelectedQueuePatient(pt);
-    setDiagnosis(pt.clinicalSummary?.diagnosis || '');
-    setClinicalNotes(pt.clinicalSummary?.clinicalNotes || '');
-    setFollowUp(pt.followUp || '15-Oct-2026 at Cardiology OPD');
+    setDiagnosis(pt.diagnosis || pt.clinicalSummary?.diagnosis || '');
+    setClinicalNotes(pt.clinicalNotes || pt.clinicalSummary?.clinicalNotes || '');
+    setFollowUp(pt.followUp || '18-Sep-2026 at Cardiology OPD, Room 104');
     setPrescriptions(pt.prescriptions ? [...pt.prescriptions] : []);
   };
 
-  useEffect(() => {
-    if (doctorSession) {
-      fetchQueue();
-      fetchAppointments();
-      const timer = setInterval(() => {
-        fetchAppointments();
-      }, 5000);
-      return () => clearInterval(timer);
-    }
-  }, [doctorSession, fetchQueue, fetchAppointments]);
-
-  const handleAcceptAppointment = async (apt) => {
-    try {
-      const res = await fetch('/api/appointments/accept', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          appointmentId: apt.id,
-          doctorName: doctorSession.name,
-          doctorRegNo: doctorSession.regNo,
-          department: doctorSession.department || 'Cardiology',
-          confirmedTime: `${apt.requestedDate} at ${apt.requestedTime}`
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        addToast(`Consultation schedule confirmed for ${apt.patientName}! Patient has been notified.`);
-        fetchAppointments();
-      } else {
-        addToast(data.message || 'Failed to accept schedule', 'error');
-      }
-    } catch (e) {
-      addToast('Network error accepting schedule', 'error');
+  const handleAttendPriorityCase = () => {
+    // Select first urgent patient (Selvaraj or Karthikeyan)
+    const urgentPt = queue.find(q => q.isUrgent && q.id !== selectedQueuePatient.id) || queue.find(q => q.isUrgent);
+    if (urgentPt) {
+      selectPatient(urgentPt);
+      addToast(`Switched to priority triage patient: ${urgentPt.name}`);
     }
   };
 
-  const handleStartAppointmentVideo = (apt) => {
-    setActiveVideoRoom({
-      roomId: apt.roomId || `ROOM_${apt.id.replace(/[^a-zA-Z0-9]/g, '')}`,
-      patientName: apt.patientName,
-      receiptId: apt.receiptId,
-      role: 'doctor'
-    });
-    addToast(`Connected to consultation room with ${apt.patientName}`);
+  const handleInsertSoapTemplate = () => {
+    const soapTemplate = `SUBJECTIVE:\nPatient reports improvement in symptoms with current medication regimen.\n\nOBJECTIVE:\nGeneral condition fair, afebrile, clear chest sounds, cardiovascular S1/S2 heard normal.\n\nASSESSMENT:\nStable cardiac status under medical management.\n\nPLAN:\nContinue existing medications, re-evaluate during scheduled OPD review.`;
+    setClinicalNotes(soapTemplate);
+    addToast('SOAP clinical documentation template inserted');
+  };
+
+  const handleQuickSelectDiagnosis = (term) => {
+    if (diagnosis.includes(term)) return;
+    const updated = diagnosis ? `${diagnosis}, ${term}` : term;
+    setDiagnosis(updated);
+    addToast(`Added '${term}' to diagnosis`);
+  };
+
+  const handleSetFollowUpDate = (period) => {
+    let dateStr = '';
+    const now = new Date();
+    if (period === '1w') now.setDate(now.getDate() + 7);
+    else if (period === '2w') now.setDate(now.getDate() + 14);
+    else if (period === '1m') now.setMonth(now.getMonth() + 1);
+    else if (period === '3m') now.setMonth(now.getMonth() + 3);
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const d = String(now.getDate()).padStart(2, '0');
+    const m = months[now.getMonth()];
+    const y = now.getFullYear();
+    dateStr = `${d}-${m}-${y} at Cardiology OPD, Room 104`;
+    setFollowUp(dateStr);
+    addToast(`Follow-up schedule set: ${dateStr}`);
   };
 
   const handleSaveEMR = async (e) => {
     if (e) e.preventDefault();
     if (!selectedQueuePatient) return;
 
-    try {
-      const res = await fetch('/api/doctor/update-notes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          receiptId: selectedQueuePatient.receiptId,
+    // Update in local state
+    const updatedQueue = queue.map(q => {
+      if (q.id === selectedQueuePatient.id) {
+        return {
+          ...q,
           diagnosis,
           clinicalNotes,
           followUp,
           prescriptions
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        addToast(`EMR updated for ${selectedQueuePatient.name}`);
-        // update local state
-        setSelectedQueuePatient(prev => ({
-          ...prev,
-          clinicalSummary: {
-            ...prev.clinicalSummary,
-            diagnosis,
-            clinicalNotes
-          },
-          followUp,
-          prescriptions
-        }));
-      } else {
-        addToast(data.message || 'Failed to update EMR', 'error');
+        };
       }
-    } catch (err) {
-      addToast('Error saving EMR to database', 'error');
-    }
+      return q;
+    });
+    setQueue(updatedQueue);
+    setSelectedQueuePatient(prev => ({
+      ...prev,
+      diagnosis,
+      clinicalNotes,
+      followUp,
+      prescriptions
+    }));
+    addToast(`EMR saved & verified for ${selectedQueuePatient.name}`);
   };
 
   const handleAddPrescription = () => {
@@ -578,9 +739,9 @@ function DoctorStandaloneApp() {
       addToast('Please enter medicine name', 'error');
       return;
     }
-    setPrescriptions([...prescriptions, { ...newMed, instructions: 'Take as directed' }]);
+    setPrescriptions([...prescriptions, { ...newMed }]);
     setNewMed({ medicine: '', dosage: '', frequency: '1 - 0 - 0', timing: 'After Food', duration: '15 Days' });
-    addToast('Medication added to active prescription');
+    addToast('Medication added to prescription');
   };
 
   const handleRemovePrescription = (idx) => {
@@ -589,40 +750,33 @@ function DoctorStandaloneApp() {
     addToast('Medication removed');
   };
 
-  const handleStartVideo = async () => {
+  const handleStartVideo = () => {
     if (!selectedQueuePatient) return;
-    try {
-      const res = await fetch('/api/teleconsult/room', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          receiptId: selectedQueuePatient.receiptId,
-          patientName: selectedQueuePatient.name,
-          doctorName: doctorSession.name,
-          doctorRegNo: doctorSession.regNo,
-          role: 'doctor'
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        setActiveVideoRoom({ ...data.room, role: 'doctor' });
-        addToast(`Connected to teleconsultation room: ${data.room.roomId}`);
-      }
-    } catch (e) {
-      addToast('Error starting video consultation room', 'error');
-    }
+    setActiveVideoRoom({
+      roomId: `ROOM_${selectedQueuePatient.receiptId.replace(/[^a-zA-Z0-9]/g, '')}`,
+      patientName: selectedQueuePatient.name,
+      receiptId: selectedQueuePatient.receiptId,
+      department: 'Cardiology Super-Speciality',
+      role: 'doctor'
+    });
+    addToast(`Starting HD Teleconsultation with ${selectedQueuePatient.name}...`);
   };
 
-  const handleMarkComplete = async () => {
-    if (!selectedQueuePatient) return;
-    await handleSaveEMR();
-    addToast(`Consultation for ${selectedQueuePatient.name} marked complete`);
-    // advance queue
-    const currentIdx = queue.findIndex(q => q.id === selectedQueuePatient.id);
-    if (currentIdx !== -1 && currentIdx < queue.length - 1) {
-      selectPatient(queue[currentIdx + 1]);
-    }
+  const handleMarkComplete = () => {
+    handleSaveEMR();
+    addToast(`Consultation for ${selectedQueuePatient.name} completed successfully!`);
   };
+
+  // Filtered queue based on search input
+  const filteredQueue = queue.filter(q => {
+    if (!searchQuery.trim()) return true;
+    const qLower = searchQuery.toLowerCase();
+    return (
+      q.name.toLowerCase().includes(qLower) ||
+      q.receiptId.toLowerCase().includes(qLower) ||
+      (q.diagnosis && q.diagnosis.toLowerCase().includes(qLower))
+    );
+  });
 
   if (!doctorSession) {
     return (
@@ -634,429 +788,821 @@ function DoctorStandaloneApp() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#F8FAFC' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#F8FAFC', position: 'relative', overflowX: 'hidden' }}>
+      
+      {/* Top Dark Navy Accent Strip */}
+      <div className="top-navy-strip"></div>
+
       <ToastList toasts={toasts} />
 
-      {/* Institutional Doctor Header */}
-      <header style={{ background: '#FFFFFF', borderBottom: '2px solid #E2E8F0', padding: '12px 0', position: 'sticky', top: 0, zIndex: 50 }}>
+      {/* Institutional Top Header */}
+      <header style={{ background: '#FFFFFF', borderBottom: '1.5px solid #E2E8F0', padding: '12px 0', position: 'sticky', top: 0, zIndex: 50 }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+          
+          {/* Header Left: Emblem Logo, Name, Subtitle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <img src={LOGO_SRC} alt="Government of Tamil Nadu" style={{ width: '48px', height: '48px' }} />
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '1.5px solid #CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FFFFFF', padding: '2px' }}>
+              <img src={LOGO_SRC} alt="Government of Tamil Nadu" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            </div>
             <div>
-              <div style={{ fontSize: '11px', color: '#046A38', fontWeight: '800', textTransform: 'uppercase' }}>
-                TAMIL NADU MEDICAL COUNCIL • CLINICAL OPD DESK
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '11px', color: '#046A38', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                  TAMIL NADU MEDICAL COUNCIL
+                </span>
+                <span style={{ background: '#E0F2FE', color: '#0369A1', border: '1px solid #BAE6FD', padding: '2px 10px', borderRadius: '9999px', fontSize: '11px', fontWeight: '700' }}>
+                  Cardiology Speciality
+                </span>
               </div>
-              <div style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A' }}>
-                {doctorSession.name}
-              </div>
-              <div style={{ fontSize: '12px', color: '#64748B' }}>
-                {doctorSession.qualification} • Reg: <strong>{doctorSession.regNo}</strong> • {doctorSession.hospital}
+              <h1 style={{ fontSize: '18.5px', fontWeight: '800', color: '#0F172A', margin: '2px 0 0 0', lineHeight: '1.2' }}>
+                {doctorSession.name || 'Dr. S. K. Aravind'}
+              </h1>
+              <div style={{ fontSize: '12px', color: '#64748B', marginTop: '1px' }}>
+                {doctorSession.qualification || 'MD (Gen Med), DM (Cardiology), FACC'}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ background: '#F0FDF4', border: '1px solid #86EFAC', color: '#166534', padding: '6px 14px', borderRadius: '9999px', fontSize: '12.5px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="status-dot-pulse"></span>
-              OPD ROOM 104 • ACTIVE
-            </span>
-            <a href="/" className="btn btn-outline" style={{ fontSize: '13px', padding: '8px 16px', textDecoration: 'none' }}>
+          {/* Header Right: Public Portal button + Sign Out button */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <a 
+              href="/" 
+              style={{ 
+                background: '#FFFFFF', 
+                border: '1.5px solid #CBD5E1', 
+                color: '#0F172A', 
+                fontSize: '13px', 
+                fontWeight: '700', 
+                padding: '7px 14px', 
+                borderRadius: '8px', 
+                textDecoration: 'none', 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: '6px' 
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
               Public Portal
             </a>
+
             <button 
-              className="btn btn-danger" 
-              style={{ fontSize: '13px', padding: '8px 16px' }}
+              style={{ 
+                background: '#DC2626', 
+                color: '#FFFFFF', 
+                border: 'none', 
+                fontSize: '13px', 
+                fontWeight: '700', 
+                padding: '7px 16px', 
+                borderRadius: '8px', 
+                cursor: 'pointer' 
+              }}
               onClick={handleDoctorLogout}
             >
               Sign Out
             </button>
           </div>
+
         </div>
       </header>
 
-      {/* Doctor OPD Layout */}
-      <main className="container" style={{ flex: 1, padding: '24px 0 40px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 340px) 1fr', gap: '24px' }}>
-          
-          {/* Left Column: OPD Queue List & Video Consultation Requests */}
-          <div>
-            
-            {/* REQUESTED VIDEO CONSULTATIONS PANEL */}
-            <div style={{ background: '#FFFFFF', border: '1.5px solid #CBD5E1', borderRadius: '12px', padding: '16px', marginBottom: '20px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1.5px solid #E2E8F0', paddingBottom: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                  </svg>
-                  <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
-                    Requested Schedules
-                  </h3>
-                </div>
-                <span style={{ 
-                  background: appointments.filter(a => a.status === 'Pending').length > 0 ? '#DC2626' : '#64748B', 
-                  color: '#FFFFFF', 
-                  fontSize: '11px', 
-                  fontWeight: '800', 
-                  padding: '2px 8px', 
-                  borderRadius: '9999px' 
-                }}>
-                  {appointments.filter(a => a.status === 'Pending').length} Pending
-                </span>
-              </div>
+      {/* Main Container */}
+      <main className="container" style={{ flex: 1, padding: '16px 0 40px' }}>
 
-              {appointments.length === 0 ? (
-                <div style={{ fontSize: '12.5px', color: '#64748B', textAlign: 'center', padding: '14px 8px' }}>
-                  No pending consultation requests in {doctorSession.department || 'Cardiology'} department.
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {appointments.map((apt) => {
-                    const isPending = apt.status === 'Pending';
-                    return (
-                      <div 
-                        key={apt.id}
-                        style={{
-                          background: isPending ? '#FFFBEB' : '#F0FDF4',
-                          border: isPending ? '1.5px solid #FCD34D' : '1.5px solid #86EFAC',
-                          borderRadius: '10px',
-                          padding: '12px 14px',
-                          boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
-                        }}
-                      >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                          <div>
-                            <span style={{ fontSize: '10.5px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase' }}>
-                              {apt.department}
-                            </span>
-                            <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', margin: '2px 0' }}>
-                              {apt.patientName}
-                            </h4>
-                          </div>
-                          <span style={{ 
-                            fontSize: '10.5px', 
-                            fontWeight: '700', 
-                            padding: '2px 7px', 
-                            borderRadius: '4px',
-                            background: isPending ? '#F59E0B' : '#166534',
-                            color: '#FFFFFF'
-                          }}>
-                            {isPending ? 'Pending Doctor Action' : 'Confirmed'}
-                          </span>
-                        </div>
+        {/* Coral Priority Triage Banner */}
+        <div className="triage-priority-banner">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span className="triage-pulse-dot"></span>
+            <span style={{ fontSize: '13px', fontWeight: '800', color: '#B91C1C' }}>
+              PRIORITY TRIAGE: 3 patient(s) flagged with acute/urgent clinical complaints.
+            </span>
+          </div>
+          <button 
+            style={{ 
+              background: '#DC2626', 
+              color: '#FFFFFF', 
+              border: 'none', 
+              borderRadius: '6px', 
+              padding: '6px 14px', 
+              fontSize: '12px', 
+              fontWeight: '700', 
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            onClick={handleAttendPriorityCase}
+          >
+            Attend Priority Case Immediately →
+          </button>
+        </div>
 
-                        <div style={{ fontSize: '12px', color: '#475569', marginTop: '2px' }}>
-                          Receipt: <strong>{apt.receiptId}</strong> • Slot: <strong>{apt.requestedDate} ({apt.requestedTime})</strong>
-                        </div>
-
-                        {/* PATIENT REPORTED HEALTH ISSUE BOX */}
-                        <div style={{ margin: '8px 0', background: '#FFFFFF', padding: '8px 10px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
-                          <span style={{ fontSize: '11px', fontWeight: '800', color: '#046A38', textTransform: 'uppercase' }}>
-                            Patient's Reported Issue:
-                          </span>
-                          <p style={{ margin: '3px 0 0', fontSize: '12.5px', color: '#1E293B', fontStyle: 'italic', lineHeight: '1.4' }}>
-                            "{apt.issueDescription}"
-                          </p>
-                        </div>
-
-                        {isPending ? (
-                          <button 
-                            className="btn btn-primary"
-                            style={{ width: '100%', fontSize: '12.5px', padding: '8px 12px', marginTop: '4px', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                            onClick={() => handleAcceptAppointment(apt)}
-                          >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                            Accept Schedule & Confirm Timing
-                          </button>
-                        ) : (
-                          <button 
-                            className="btn btn-video"
-                            style={{ width: '100%', fontSize: '12.5px', padding: '8px 12px', marginTop: '4px', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                            onClick={() => handleStartAppointmentVideo(apt)}
-                          >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                            Join Confirmed Video Room
-                          </button>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+        {/* Quick Stats Overview: Today's Appointments & Patient Count */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '18px' }}>
+          {/* Card 1: Today's Appointments */}
+          <div style={{ 
+            background: '#FFFFFF', 
+            border: '1.5px solid #E2E8F0', 
+            borderRadius: '12px', 
+            padding: '14px 18px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '14px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+          }}>
+            <div style={{ 
+              width: '46px', 
+              height: '46px', 
+              borderRadius: '10px', 
+              background: '#EFF6FF', 
+              color: '#0284C7', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
             </div>
-
-            <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '18px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
-                  Today's OPD Queue ({queue.length})
-                </h3>
-                <button 
-                  onClick={fetchQueue} 
-                  title="Refresh Queue"
-                  style={{ background: 'none', border: 'none', color: '#0F4C81', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: '700' }}
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <polyline points="23 4 23 10 17 10"/>
-                    <polyline points="1 20 1 14 7 14"/>
-                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-                  </svg>
-                  Refresh
-                </button>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Today's Appointments
               </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {queue.map((pt, idx) => {
-                  const isSelected = selectedQueuePatient && selectedQueuePatient.id === pt.id;
-                  return (
-                    <div 
-                      key={pt.id}
-                      onClick={() => selectPatient(pt)}
-                      style={{
-                        padding: '12px 14px',
-                        borderRadius: '10px',
-                        border: isSelected ? '2px solid var(--primary)' : '1px solid #E2E8F0',
-                        background: isSelected ? '#F0F9FF' : '#FFFFFF',
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease'
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <div>
-                          <span style={{ fontSize: '11px', fontWeight: '800', color: isSelected ? 'var(--primary)' : '#64748B' }}>
-                            TOKEN #{String(idx + 1).padStart(2, '0')}
-                          </span>
-                          <h4 style={{ fontSize: '14.5px', fontWeight: '700', color: '#0F172A', margin: '2px 0' }}>
-                            {pt.name}
-                          </h4>
-                        </div>
-                        <span style={{ 
-                          fontSize: '11px', 
-                          fontWeight: '700', 
-                          padding: '3px 8px', 
-                          borderRadius: '9999px',
-                          background: pt.status?.includes('Waiting') ? '#FEF3C7' : '#DCFCE7',
-                          color: pt.status?.includes('Waiting') ? '#92400E' : '#166534'
-                        }}>
-                          {pt.status?.includes('Waiting') ? 'Waiting' : 'In Clinic'}
-                        </span>
-                      </div>
-                      <div style={{ fontSize: '12px', color: '#64748B', marginTop: '4px' }}>
-                        Receipt: <strong>{pt.receiptId}</strong> | Age: {pt.age} ({pt.gender})
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#0F4C81', fontWeight: '600', marginTop: '2px' }}>
-                        {pt.clinicalSummary?.diagnosis || 'Initial OPD Evaluation'}
-                      </div>
-                    </div>
-                  );
-                })}
+              <div style={{ fontSize: '22px', fontWeight: '900', color: '#0F172A', lineHeight: '1.2' }}>
+                {appointments.length} <span style={{ fontSize: '12px', fontWeight: '600', color: '#0284C7' }}>Total</span>
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                <strong style={{ color: '#D97706' }}>{appointments.filter(a => a.status === 'Pending').length} Pending</strong> • <strong style={{ color: '#046A38' }}>{appointments.filter(a => a.status === 'Confirmed').length} Confirmed</strong>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Clinical Workbench */}
+          {/* Card 2: Today's Patient Count */}
+          <div style={{ 
+            background: '#FFFFFF', 
+            border: '1.5px solid #E2E8F0', 
+            borderRadius: '12px', 
+            padding: '14px 18px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '14px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+          }}>
+            <div style={{ 
+              width: '46px', 
+              height: '46px', 
+              borderRadius: '10px', 
+              background: '#F0FDF4', 
+              color: '#046A38', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Today's Patient Count
+              </div>
+              <div style={{ fontSize: '22px', fontWeight: '900', color: '#0F172A', lineHeight: '1.2' }}>
+                {queue.length} <span style={{ fontSize: '12px', fontWeight: '600', color: '#046A38' }}>Patients</span>
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                <strong style={{ color: '#046A38' }}>{queue.filter(q => q.status === 'In Clinic').length} In Clinic</strong> • <strong style={{ color: '#2563EB' }}>{queue.filter(q => q.status === 'Waiting').length} Waiting</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Priority Triage */}
+          <div style={{ 
+            background: '#FFFFFF', 
+            border: '1.5px solid #FEE2E2', 
+            borderRadius: '12px', 
+            padding: '14px 18px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '14px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+          }}>
+            <div style={{ 
+              width: '46px', 
+              height: '46px', 
+              borderRadius: '10px', 
+              background: '#FEF2F2', 
+              color: '#DC2626', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Priority Triage
+              </div>
+              <div style={{ fontSize: '22px', fontWeight: '900', color: '#B91C1C', lineHeight: '1.2' }}>
+                {queue.filter(q => q.isUrgent).length} <span style={{ fontSize: '12px', fontWeight: '600', color: '#DC2626' }}>Urgent</span>
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                Acute clinical complaint flagged
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Clinical EMR Status */}
+          <div style={{ 
+            background: '#FFFFFF', 
+            border: '1.5px solid #E2E8F0', 
+            borderRadius: '12px', 
+            padding: '14px 18px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '14px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+          }}>
+            <div style={{ 
+              width: '46px', 
+              height: '46px', 
+              borderRadius: '10px', 
+              background: '#F5F3FF', 
+              color: '#7C3AED', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Active Patient
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', lineHeight: '1.3', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '160px' }}>
+                {selectedQueuePatient ? selectedQueuePatient.name.split(' ')[0] : 'None'}
+              </div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                Token #{selectedQueuePatient?.tokenNum || '01'} ({selectedQueuePatient?.gender})
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2-Column Split Workbench Layout */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(310px, 330px) 1fr', gap: '22px', alignItems: 'start' }}>
+          
+          {/* LEFT SIDEBAR: Duty Card + Pills + Search + Token List */}
           <div>
-            {selectedQueuePatient ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                
-                {/* Patient Banner */}
-                <div style={{ background: '#FFFFFF', border: '1.5px solid #CBD5E1', borderRadius: '12px', padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                  <div>
-                    <div style={{ fontSize: '12px', color: '#046A38', fontWeight: '800', textTransform: 'uppercase' }}>
-                      ACTIVE CONSULTATION EMR FILE
+            
+            {/* Clinical Duty Physician Card */}
+            <div className="physician-duty-card">
+              <div className="physician-duty-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontSize: '9.5px', fontWeight: '800', color: '#38BDF8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  CLINICAL DUTY PHYSICIAN
+                </div>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#FFFFFF', marginTop: '1px' }}>
+                  Dr. S. K. Aravind, MD, DM
+                </div>
+                <div style={{ fontSize: '11px', color: '#94A3B8' }}>
+                  Chief Consultant & HOD
+                </div>
+              </div>
+            </div>
+
+            {/* OPD Queue & Schedules Pills */}
+            <div className="pill-nav-group">
+              <button 
+                className={`pill-nav-btn ${activeSideTab === 'queue' ? 'active' : ''}`}
+                onClick={() => setActiveSideTab('queue')}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span>Today's Patients</span>
+                <span className="pill-count-badge">{queue.length}</span>
+              </button>
+
+              <button 
+                className={`pill-nav-btn ${activeSideTab === 'schedules' ? 'active' : ''}`}
+                onClick={() => setActiveSideTab('schedules')}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>Today's Appointments</span>
+                <span className="pill-count-badge">{appointments.length}</span>
+              </button>
+            </div>
+
+            {/* Search Input Box */}
+            <div className="queue-search-wrap">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input 
+                type="text" 
+                className="queue-search-input"
+                placeholder="Search queue by name, receipt, or diagnosis..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+
+            {/* Patient Token Cards List (when Queue tab active) */}
+            {activeSideTab === 'queue' && (
+              <div>
+                {filteredQueue.length === 0 ? (
+                  <div style={{ background: '#FFFFFF', padding: '24px', textAlign: 'center', borderRadius: '10px', color: '#64748B', fontSize: '13px' }}>
+                    No patients match your search.
+                  </div>
+                ) : (
+                  filteredQueue.map((pt) => {
+                    const isSelected = selectedQueuePatient && selectedQueuePatient.id === pt.id;
+                    const isUrgentBorder = pt.hasUrgentBorder || (pt.isUrgent && pt.tokenNum === '03');
+
+                    return (
+                      <div 
+                        key={pt.id}
+                        className={`patient-token-card ${isSelected ? 'active' : ''} ${isUrgentBorder ? 'urgent-indicator' : ''}`}
+                        onClick={() => selectPatient(pt)}
+                      >
+                        {/* Token Header Row */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                          <span style={{ fontSize: '11px', fontWeight: '800', color: isSelected ? '#0284C7' : '#64748B' }}>
+                            TOKEN #{pt.tokenNum}
+                          </span>
+                          <div style={{ display: 'flex', gap: '4px' }}>
+                            {pt.isUrgent && (
+                              <span className="badge-urgent">URGENT</span>
+                            )}
+                            {pt.status === 'In Clinic' ? (
+                              <span className="badge-inclinic">In Clinic</span>
+                            ) : (
+                              <span className="badge-waiting">Waiting</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Patient Name */}
+                        <div style={{ fontSize: '14.5px', fontWeight: '800', color: '#0F172A', margin: '2px 0' }}>
+                          {pt.name}
+                        </div>
+
+                        {/* Receipt and Age */}
+                        <div style={{ fontSize: '11.5px', color: '#64748B' }}>
+                          Receipt: <strong>{pt.receiptId}</strong> | Age: {pt.age} ({pt.gender})
+                        </div>
+
+                        {/* Diagnosis Tag Line */}
+                        <div style={{ fontSize: '11.5px', color: '#0284C7', fontWeight: '600', marginTop: '3px', lineHeight: '1.35' }}>
+                          {pt.diagnosis}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            )}
+
+            {/* Requested Schedules Panel (when Schedules tab active) */}
+            {activeSideTab === 'schedules' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {appointments.map((apt) => (
+                  <div 
+                    key={apt.id}
+                    style={{ background: '#FFFFFF', border: '1.5px solid #CBD5E1', borderRadius: '10px', padding: '12px 14px' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <div>
+                        <span style={{ fontSize: '10.5px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase' }}>
+                          {apt.department}
+                        </span>
+                        <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A' }}>
+                          {apt.patientName}
+                        </div>
+                      </div>
+                      <span className="badge-urgent">Pending</span>
                     </div>
-                    <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0F172A', margin: '2px 0 6px' }}>
-                      {selectedQueuePatient.name}
-                    </h2>
-                    <div style={{ fontSize: '13px', color: '#64748B', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                      <span>Receipt: <strong>{selectedQueuePatient.receiptId}</strong></span>
-                      <span>•</span>
-                      <span>ABHA: <strong>{selectedQueuePatient.abhaId}</strong></span>
-                      <span>•</span>
-                      <span>Age: <strong>{selectedQueuePatient.age} ({selectedQueuePatient.gender})</strong></span>
-                      <span>•</span>
-                      <span>Blood: <strong style={{ color: '#DC2626' }}>{selectedQueuePatient.bloodGroup}</strong></span>
+                    <div style={{ fontSize: '12px', color: '#64748B', margin: '4px 0' }}>
+                      Receipt: <strong>{apt.receiptId}</strong> • Slot: <strong>{apt.requestedTime}</strong>
+                    </div>
+                    <p style={{ margin: '4px 0 8px', fontSize: '12px', color: '#334155', fontStyle: 'italic', background: '#F8FAFC', padding: '6px 8px', borderRadius: '6px' }}>
+                      "{apt.issueDescription}"
+                    </p>
+                    <button 
+                      className="btn-start-video-blue"
+                      style={{ width: '100%', justifyContent: 'center', padding: '6px 12px', fontSize: '12px' }}
+                      onClick={handleStartVideo}
+                    >
+                      Connect Video Consultation
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+          </div>
+
+          {/* RIGHT COLUMN: MAIN EMR CONSULTATION WORKBENCH */}
+          <div>
+            {selectedQueuePatient && (
+              <div>
+                
+                {/* 1. Large Patient Header Card */}
+                <div className="emr-header-card">
+                  {/* Green Confidential Banner */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span style={{ fontSize: '11px', color: '#059669', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      ACTIVE CONSULTATION EMR FILE • CONFIDENTIAL
+                    </span>
+                  </div>
+
+                  {/* Patient Initials Avatar + Name */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
+                    <div className="emr-initials-box">
+                      {selectedQueuePatient.initials || 'PT'}
+                    </div>
+                    <div>
+                      <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0F172A', margin: 0, lineHeight: '1.2' }}>
+                        {selectedQueuePatient.name}
+                      </h2>
+                      {/* Tags Row */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginTop: '6px' }}>
+                        <span className="emr-tag-pill">
+                          Receipt: <strong>{selectedQueuePatient.receiptId}</strong>
+                        </span>
+                        <span className="emr-tag-pill green-border">
+                          ABHA: <strong>{selectedQueuePatient.abhaId}</strong>
+                        </span>
+                        <span className="emr-tag-pill">
+                          Age: <strong>{selectedQueuePatient.age} ({selectedQueuePatient.gender})</strong>
+                        </span>
+                        <span className="emr-tag-pill coral-border">
+                          Blood: <strong>{selectedQueuePatient.bloodGroup}</strong>
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button 
-                      className="btn btn-video" 
-                      style={{ padding: '10px 18px', fontSize: '13.5px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                      onClick={handleStartVideo}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  {/* Patient Action Controls Row */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '14px', paddingTop: '12px', borderTop: '1px solid #F1F5F9' }}>
+                    <button className="btn-start-video-blue" onClick={handleStartVideo}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                         <polygon points="23 7 16 12 23 17 23 7"/>
                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
                       </svg>
-                      Start Video Consultation with Patient
+                      Start Video Call
                     </button>
                   </div>
                 </div>
 
-                {/* Workbench Tabs */}
-                <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid #E2E8F0', paddingBottom: '2px' }}>
+                {/* 2. Horizontal Workbench Tabs */}
+                <div className="emr-horizontal-tabs">
                   <button 
-                    className={`modal-tab-btn ${activeWorkbenchTab === 'notes' ? 'active' : ''}`}
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'notes' ? 'active' : ''}`}
                     onClick={() => setActiveWorkbenchTab('notes')}
-                    style={{ fontSize: '14px', padding: '10px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                       <polyline points="14 2 14 8 20 8"/>
-                      <line x1="16" y1="13" x2="8" y2="13"/>
-                      <line x1="16" y1="17" x2="8" y2="17"/>
                     </svg>
-                    Clinical Findings & Progress Notes
+                    Clinical Notes
                   </button>
 
                   <button 
-                    className={`modal-tab-btn ${activeWorkbenchTab === 'vitals' ? 'active' : ''}`}
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'vitals' ? 'active' : ''}`}
                     onClick={() => setActiveWorkbenchTab('vitals')}
-                    style={{ fontSize: '14px', padding: '10px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
-                    Vitals on Record
+                    Vital Signs
                   </button>
 
                   <button 
-                    className={`modal-tab-btn ${activeWorkbenchTab === 'prescriptions' ? 'active' : ''}`}
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'prescriptions' ? 'active' : ''}`}
                     onClick={() => setActiveWorkbenchTab('prescriptions')}
-                    style={{ fontSize: '14px', padding: '10px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
-                      <path d="m8.5 8.5 7 7"/>
                     </svg>
-                    Electronic Prescriptions ({prescriptions.length})
+                    Prescriptions <span style={{ background: '#F1F5F9', padding: '1px 6px', borderRadius: '4px', fontSize: '11px' }}>{prescriptions.length}</span>
                   </button>
 
                   <button 
-                    className={`modal-tab-btn ${activeWorkbenchTab === 'labs' ? 'active' : ''}`}
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'labs' ? 'active' : ''}`}
                     onClick={() => setActiveWorkbenchTab('labs')}
-                    style={{ fontSize: '14px', padding: '10px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M10 2v7.31"/>
                       <path d="M14 9.3V2"/>
                       <path d="M8.5 2h7"/>
                       <path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>
                       <path d="M5.52 16h12.96"/>
                     </svg>
-                    Diagnostic Lab Reports ({selectedQueuePatient.labReports?.length || 0})
+                    Lab Reports <span style={{ background: '#F1F5F9', padding: '1px 6px', borderRadius: '4px', fontSize: '11px' }}>{selectedQueuePatient.labReports?.length || 5}</span>
+                  </button>
+
+                  <button 
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'past' ? 'active' : ''}`}
+                    onClick={() => setActiveWorkbenchTab('past')}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    </svg>
+                    Past E-Records <span style={{ background: '#F1F5F9', padding: '1px 6px', borderRadius: '4px', fontSize: '11px' }}>{selectedQueuePatient.pastRecords?.length || 3}</span>
+                  </button>
+
+                  <button 
+                    className={`emr-tab-pill ${activeWorkbenchTab === 'receipts' ? 'active' : ''}`}
+                    onClick={() => setActiveWorkbenchTab('receipts')}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <line x1="6" y1="8" x2="18" y2="8"/>
+                      <line x1="6" y1="12" x2="18" y2="12"/>
+                    </svg>
+                    Old Receipts <span style={{ background: '#F1F5F9', padding: '1px 6px', borderRadius: '4px', fontSize: '11px' }}>{selectedQueuePatient.oldReceipts?.length || 3}</span>
                   </button>
                 </div>
 
-                {/* Tab 1: Clinical Notes Form */}
+                {/* TAB 1: CLINICAL NOTES (Matches Screenshot Section by Section) */}
                 {activeWorkbenchTab === 'notes' && (
-                  <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px' }}>
-                    <form onSubmit={handleSaveEMR}>
-                      <div className="form-group" style={{ marginBottom: '18px' }}>
-                        <label className="form-label" style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-                          Clinical Diagnosis & Assessment Findings
-                        </label>
-                        <textarea 
-                          className="form-control" 
-                          rows="2" 
-                          value={diagnosis} 
-                          onChange={(e) => setDiagnosis(e.target.value)} 
-                          required 
-                          style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
-                        />
+                  <div>
+                    
+                    {/* Section 1: Clinical Diagnosis & Assessment Findings */}
+                    <div className="emr-section-box">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2.2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                          </svg>
+                          <div>
+                            <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
+                              Clinical Diagnosis & Assessment Findings
+                            </h3>
+                            <div style={{ fontSize: '11.5px', color: '#64748B' }}>
+                              Primary Diagnostic Staging & Cardiac Assessment
+                            </div>
+                          </div>
+                        </div>
+
+                        <span style={{ background: '#F1F5F9', border: '1px solid #E2E8F0', padding: '3px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: '700', color: '#475569' }}>
+                          ICD-10 Clinical Standard
+                        </span>
                       </div>
 
-                      <div className="form-group" style={{ marginBottom: '18px' }}>
-                        <label className="form-label" style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-                          Physician Progress Notes & Management Strategy
-                        </label>
-                        <textarea 
-                          className="form-control" 
-                          rows="4" 
-                          value={clinicalNotes} 
-                          onChange={(e) => setClinicalNotes(e.target.value)} 
-                          required 
-                          style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
-                        />
+                      {/* Quick Select Chips Row */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', margin: '10px 0' }}>
+                        <span style={{ fontSize: '11px', fontWeight: '800', color: '#64748B' }}>
+                          QUICK SELECT:
+                        </span>
+                        <button type="button" className="chip-quick-select" onClick={() => handleQuickSelectDiagnosis('CAD (Mild)')}>
+                          + CAD (Mild)
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleQuickSelectDiagnosis('HTN Stage 1')}>
+                          + HTN Stage 1
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleQuickSelectDiagnosis('T2DM')}>
+                          + T2DM
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleQuickSelectDiagnosis('Normal Sinus')}>
+                          + Normal Sinus
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleQuickSelectDiagnosis('Post-Angio Stable')}>
+                          + Post-Angio Stable
+                        </button>
                       </div>
 
-                      <div className="form-group" style={{ marginBottom: '24px' }}>
-                        <label className="form-label" style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-                          Scheduled Follow-up Date & Clinic Location
-                        </label>
+                      {/* Diagnosis Textarea */}
+                      <textarea 
+                        rows="2"
+                        value={diagnosis}
+                        onChange={(e) => setDiagnosis(e.target.value)}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '13.5px', color: '#0F172A', outline: 'none', lineHeight: '1.4' }}
+                      />
+                    </div>
+
+                    {/* Section 2: Physician Progress Notes & Management Strategy */}
+                    <div className="emr-section-box">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2.2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                          </svg>
+                          <div>
+                            <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
+                              Physician Progress Notes & Management Strategy
+                            </h3>
+                            <div style={{ fontSize: '11.5px', color: '#64748B' }}>
+                              SOAP Clinical Documentation & Therapeutic Plan
+                            </div>
+                          </div>
+                        </div>
+
+                        <button 
+                          type="button" 
+                          style={{ background: '#E0F2FE', border: '1px solid #BAE6FD', color: '#0284C7', padding: '4px 12px', borderRadius: '6px', fontSize: '11.5px', fontWeight: '700', cursor: 'pointer' }}
+                          onClick={handleInsertSoapTemplate}
+                        >
+                          + Insert SOAP Template
+                        </button>
+                      </div>
+
+                      {/* Progress Notes Textarea */}
+                      <textarea 
+                        rows="4"
+                        value={clinicalNotes}
+                        onChange={(e) => setClinicalNotes(e.target.value)}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '13.5px', color: '#0F172A', outline: 'none', lineHeight: '1.5' }}
+                      />
+                    </div>
+
+                    {/* Section 3: Scheduled Follow-up Date & Clinic Location */}
+                    <div className="emr-section-box">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.2">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                          <line x1="16" y1="2" x2="16" y2="6"/>
+                          <line x1="8" y1="2" x2="8" y2="6"/>
+                          <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <div>
+                          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
+                            Scheduled Follow-up Date & Clinic Location
+                          </h3>
+                          <div style={{ fontSize: '11.5px', color: '#64748B' }}>
+                            Next Consultation & Review Schedule
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Set Follow-up Chips Row */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', margin: '10px 0' }}>
+                        <span style={{ fontSize: '11px', fontWeight: '800', color: '#64748B' }}>
+                          SET FOLLOW-UP:
+                        </span>
+                        <button type="button" className="chip-quick-select" onClick={() => handleSetFollowUpDate('1w')}>
+                          + In 1 Week
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleSetFollowUpDate('2w')}>
+                          + In 2 Weeks
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleSetFollowUpDate('1m')}>
+                          + In 1 Month
+                        </button>
+                        <button type="button" className="chip-quick-select" onClick={() => handleSetFollowUpDate('3m')}>
+                          + In 3 Months
+                        </button>
+                      </div>
+
+                      {/* Follow-up Input Box */}
+                      <div style={{ position: 'relative' }}>
+                        <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }}>
+                          📅
+                        </span>
                         <input 
-                          type="text" 
-                          className="form-control" 
-                          value={followUp} 
-                          onChange={(e) => setFollowUp(e.target.value)} 
-                          style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
+                          type="text"
+                          value={followUp}
+                          onChange={(e) => setFollowUp(e.target.value)}
+                          style={{ width: '100%', padding: '10px 14px 10px 36px', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '13.5px', color: '#0F172A', outline: 'none' }}
                         />
                       </div>
+                    </div>
 
-                      <div style={{ display: 'flex', gap: '12px' }}>
-                        <button type="submit" className="btn btn-primary" style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '700' }}>
-                          Save & Update Patient EMR
+                    {/* Bottom Action Bar (Matches Screenshot Exactly) */}
+                    <div className="emr-bottom-bar">
+                      <span style={{ background: '#F0FDF4', border: '1px solid #86EFAC', color: '#166534', padding: '6px 14px', borderRadius: '6px', fontSize: '12px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        ✓ TNMC EMR Verified
+                      </span>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <button 
+                          type="button" 
+                          style={{ background: '#FFFFFF', border: '1.5px solid #0F172A', color: '#0F172A', padding: '8px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}
+                          onClick={() => setActiveWorkbenchTab('prescriptions')}
+                        >
+                          Prescriptions (Rx) →
                         </button>
-                        <button type="button" className="btn btn-secondary" style={{ padding: '12px 20px', fontSize: '14px' }} onClick={handleMarkComplete}>
-                          Mark Consultation Complete & Next Patient
+
+                        <button 
+                          type="button" 
+                          style={{ background: '#0F2942', color: '#FFFFFF', border: 'none', padding: '8px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                          onClick={handleSaveEMR}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                          </svg>
+                          Save EMR
+                        </button>
+
+                        <button 
+                          type="button" 
+                          style={{ background: '#046A38', color: '#FFFFFF', border: 'none', padding: '8px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                          onClick={handleMarkComplete}
+                        >
+                          Complete Consultation
                         </button>
                       </div>
-                    </form>
+                    </div>
+
                   </div>
                 )}
 
-                {/* Tab 2: Vitals */}
+                {/* TAB 2: VITAL SIGNS */}
                 {activeWorkbenchTab === 'vitals' && (
-                  <div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '16px' }}>
-                      <div className="vital-card" style={{ padding: '16px' }}>
+                  <div className="emr-section-box">
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '14px' }}>
+                      Clinical Vital Signs on Record
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px' }}>
+                      <div className="vital-card">
                         <div className="vital-label">Blood Pressure</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bp || '120/80 mmHg'}</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bp}</div>
                         <div className="vital-status">Controlled</div>
                       </div>
-                      <div className="vital-card" style={{ padding: '16px' }}>
+                      <div className="vital-card">
                         <div className="vital-label">Pulse Rate</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.pulse || '72 bpm'}</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.pulse}</div>
                         <div className="vital-status">Normal Rhythm</div>
                       </div>
-                      <div className="vital-card" style={{ padding: '16px' }}>
-                        <div className="vital-label">Oxygen (SpO2)</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.spo2 || '98%'}</div>
+                      <div className="vital-card">
+                        <div className="vital-label">Oxygen Saturation (SpO2)</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.spo2}</div>
                         <div className="vital-status">Adequate</div>
                       </div>
-                      <div className="vital-card" style={{ padding: '16px' }}>
+                      <div className="vital-card">
                         <div className="vital-label">Temperature</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.temp || '98.4 °F'}</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.temp}</div>
                         <div className="vital-status">Afebrile</div>
                       </div>
-                      <div className="vital-card" style={{ padding: '16px' }}>
+                      <div className="vital-card">
                         <div className="vital-label">Fasting Blood Sugar</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bloodSugarFasting || '95 mg/dL'}</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bloodSugarFasting}</div>
                         <div className="vital-status">Euglycemic</div>
                       </div>
-                      <div className="vital-card" style={{ padding: '16px' }}>
+                      <div className="vital-card">
                         <div className="vital-label">Body Mass Index</div>
-                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bmi || '23.8'}</div>
-                        <div className="vital-status">Wt: {selectedQueuePatient.vitals?.weight || '68 kg'}</div>
+                        <div className="vital-value" style={{ fontSize: '20px' }}>{selectedQueuePatient.vitals?.bmi}</div>
+                        <div className="vital-status">Wt: {selectedQueuePatient.vitals?.weight}</div>
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* Tab 3: Prescriptions Builder */}
+                {/* TAB 3: ELECTRONIC PRESCRIPTIONS */}
                 {activeWorkbenchTab === 'prescriptions' && (
-                  <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '16px' }}>
-                      Active Clinical Prescription
+                  <div className="emr-section-box">
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '14px' }}>
+                      Active Electronic Prescription ({prescriptions.length} items)
                     </h3>
-
-                    <div className="table-wrapper" style={{ marginBottom: '24px' }}>
+                    
+                    <div className="table-wrapper" style={{ marginBottom: '20px' }}>
                       <table className="medical-table">
                         <thead>
                           <tr>
-                            <th>Medicine & Form</th>
+                            <th>Medicine &amp; Form</th>
                             <th>Strength</th>
                             <th>Dosage Schedule</th>
                             <th>Timing</th>
@@ -1087,11 +1633,12 @@ function DoctorStandaloneApp() {
                       </table>
                     </div>
 
+                    {/* Prescription Adder */}
                     <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '16px' }}>
-                      <h4 style={{ fontSize: '14px', fontWeight: '700', color: '#0F172A', marginBottom: '12px' }}>
-                        Add New Medicine to Prescription
+                      <h4 style={{ fontSize: '13.5px', fontWeight: '700', color: '#0F172A', marginBottom: '10px' }}>
+                        Add New Medication Row
                       </h4>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginBottom: '12px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginBottom: '10px' }}>
                         <input 
                           type="text" 
                           placeholder="Medicine (e.g. Tab. Telma)"
@@ -1108,21 +1655,21 @@ function DoctorStandaloneApp() {
                         />
                         <input 
                           type="text" 
-                          placeholder="Frequency (e.g. 1 - 0 - 0)"
+                          placeholder="Frequency (1-0-0)"
                           value={newMed.frequency} 
                           onChange={(e) => setNewMed({ ...newMed, frequency: e.target.value })}
                           style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #CBD5E1', fontSize: '13px' }}
                         />
                         <input 
                           type="text" 
-                          placeholder="Timing (e.g. After Food)"
+                          placeholder="Timing (After Food)"
                           value={newMed.timing} 
                           onChange={(e) => setNewMed({ ...newMed, timing: e.target.value })}
                           style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #CBD5E1', fontSize: '13px' }}
                         />
                         <input 
                           type="text" 
-                          placeholder="Duration (e.g. 30 Days)"
+                          placeholder="Duration (30 Days)"
                           value={newMed.duration} 
                           onChange={(e) => setNewMed({ ...newMed, duration: e.target.value })}
                           style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #CBD5E1', fontSize: '13px' }}
@@ -1137,18 +1684,15 @@ function DoctorStandaloneApp() {
                         Add Medication Row
                       </button>
                     </div>
-
-                    <div style={{ marginTop: '20px' }}>
-                      <button type="button" className="btn btn-primary" onClick={handleSaveEMR} style={{ padding: '12px 24px', fontSize: '14px' }}>
-                        Save Prescription Updates to EMR
-                      </button>
-                    </div>
                   </div>
                 )}
 
-                {/* Tab 4: Lab Reports */}
+                {/* TAB 4: DIAGNOSTIC LAB REPORTS */}
                 {activeWorkbenchTab === 'labs' && (
-                  <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px' }}>
+                  <div className="emr-section-box">
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '14px' }}>
+                      Diagnostic Lab Investigations &amp; Imaging Reports
+                    </h3>
                     <div className="table-wrapper">
                       <table className="medical-table">
                         <thead>
@@ -1168,7 +1712,7 @@ function DoctorStandaloneApp() {
                               <td><strong style={{ color: '#0F172A' }}>{r.result}</strong></td>
                               <td>{r.normalRange}</td>
                               <td>
-                                <span className={`status-badge ${r.status.toLowerCase().includes('normal') ? 'status-normal' : 'status-warning'}`}>
+                                <span className={`status-badge ${r.status.toLowerCase().includes('normal') || r.status.toLowerCase().includes('optimal') ? 'status-normal' : 'status-warning'}`}>
                                   {r.status}
                                 </span>
                               </td>
@@ -1180,17 +1724,59 @@ function DoctorStandaloneApp() {
                   </div>
                 )}
 
-              </div>
-            ) : (
-              <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '60px', textAlign: 'center' }}>
-                <p style={{ color: '#64748B', fontSize: '15px' }}>Please select a patient from the OPD Queue to load their clinical chart.</p>
+                {/* TAB 5: PAST E-RECORDS */}
+                {activeWorkbenchTab === 'past' && (
+                  <div className="emr-section-box">
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '14px' }}>
+                      Past Electronic Health Records &amp; Discharge Summaries
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      {selectedQueuePatient.pastRecords?.map((rec, i) => (
+                        <div key={i} style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div>
+                            <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A' }}>{rec.title}</div>
+                            <div style={{ fontSize: '12px', color: '#64748B' }}>{rec.hospital} • {rec.date}</div>
+                          </div>
+                          <span style={{ background: '#E0F2FE', color: '#0369A1', padding: '4px 10px', borderRadius: '6px', fontSize: '11.5px', fontWeight: '700' }}>
+                            {rec.type}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 6: OLD RECEIPTS */}
+                {activeWorkbenchTab === 'receipts' && (
+                  <div className="emr-section-box">
+                    <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A', marginBottom: '14px' }}>
+                      OPD Registration &amp; Consultation Billing Receipts
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      {selectedQueuePatient.oldReceipts?.map((bill, i) => (
+                        <div key={i} style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div>
+                            <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A' }}>Receipt #{bill.receiptNo}</div>
+                            <div style={{ fontSize: '12px', color: '#64748B' }}>{bill.department} • {bill.date}</div>
+                          </div>
+                          <span style={{ background: '#DCFCE7', color: '#166534', padding: '4px 10px', borderRadius: '6px', fontSize: '11.5px', fontWeight: '700' }}>
+                            {bill.fee}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
             )}
           </div>
+
         </div>
+
       </main>
 
-      {/* Teleconsultation Video Call Modal */}
+      {/* Live Video Call Modal */}
       {activeVideoRoom && (
         <VideoConsultationModal 
           room={activeVideoRoom}
@@ -1201,10 +1787,12 @@ function DoctorStandaloneApp() {
           onToast={addToast}
         />
       )}
+
     </div>
   );
 }
 
-// Mount Doctor App
+// Mount Dedicated Doctor Application
 const doctorRoot = ReactDOM.createRoot(document.getElementById('doctor-root'));
 doctorRoot.render(<DoctorStandaloneApp />);
+
