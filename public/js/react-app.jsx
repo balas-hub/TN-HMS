@@ -1339,8 +1339,9 @@ Patient: ${p.name} | Receipt: ${p.receiptId} | Attending: Dr. ${doctor.name}
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#F8FAFC', display: 'flex', flexDirection: 'column' }}>
-      <header className="doctor-page-header">
+    <div className="doctor-portal-wrapper" style={{ minHeight: '100vh', background: '#F8FAFC', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      <div className="doctor-portal-bg-watermark" aria-hidden="true"></div>
+      <header className="doctor-page-header" style={{ position: 'sticky', top: 0, zIndex: 50 }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={onNavigateHome}>
             <img src={LOGO_SRC} alt="Medical Emblem" className="emblem-logo-img" style={{ width: '44px', height: '44px' }} />
@@ -1349,21 +1350,17 @@ Patient: ${p.name} | Receipt: ${p.receiptId} | Attending: Dr. ${doctor.name}
                 <span style={{ fontSize: '11px', color: '#38BDF8', fontWeight: '800', textTransform: 'uppercase' }}>
                   CLINICAL OPD DESK • DOCTOR WORKBENCH
                 </span>
-                <span className="badge-primary" style={{ fontSize: '10px', padding: '1px 6px' }}>ONLINE ACTIVE</span>
               </div>
               <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#FFFFFF', margin: '2px 0 0 0' }}>
-                {doctor.name} <span style={{ fontSize: '13px', fontWeight: '500', color: '#94A3B8' }}>({doctor.degrees})</span>
+                {doctor.name}
               </h2>
-              <div style={{ fontSize: '12px', color: '#94A3B8' }}>
-                Reg: <strong>{doctor.regNo}</strong> | {doctor.hospital} | <strong>{doctor.opdRoom}</strong>
+              <div style={{ fontSize: '12.5px', color: '#38BDF8', fontWeight: '600', marginTop: '2px' }}>
+                {doctor.degrees || 'MD (Gen Med), DM (Cardiology), FACC'}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <button className="btn btn-outline" style={{ background: 'rgba(255,255,255,0.08)', color: '#FFFFFF', borderColor: '#475569' }} onClick={onNavigateHome}>
-              Public Hospital Site
-            </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button className="btn btn-danger" onClick={onLogout}>
               Doctor Sign Out
             </button>
@@ -1372,6 +1369,35 @@ Patient: ${p.name} | Receipt: ${p.receiptId} | Attending: Dr. ${doctor.name}
       </header>
 
       <main className="container" style={{ flex: 1, padding: '24px 20px' }}>
+        {/* Quick Stats: Today's Appointments & Patient Count */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '20px' }}>
+          <div style={{ background: '#FFFFFF', border: '1.5px solid #E2E8F0', borderRadius: '12px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '14px', boxShadow: '0 2px 5px rgba(0,0,0,0.02)' }}>
+            <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: '#EFF6FF', color: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase' }}>Today's Appointments</div>
+              <div style={{ fontSize: '20px', fontWeight: '900', color: '#0F172A' }}>{requestedAppointments.length} <span style={{ fontSize: '12px', fontWeight: '600', color: '#0284C7' }}>Schedules</span></div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                <strong style={{ color: '#D97706' }}>{requestedAppointments.filter(a => a.status === 'Pending').length} Pending</strong> • <strong style={{ color: '#046A38' }}>{requestedAppointments.filter(a => a.status === 'Confirmed').length} Confirmed</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ background: '#FFFFFF', border: '1.5px solid #E2E8F0', borderRadius: '12px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '14px', boxShadow: '0 2px 5px rgba(0,0,0,0.02)' }}>
+            <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: '#F0FDF4', color: '#046A38', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#64748B', textTransform: 'uppercase' }}>Today's Patient Count</div>
+              <div style={{ fontSize: '20px', fontWeight: '900', color: '#0F172A' }}>{doctor.todayQueue?.length || 0} <span style={{ fontSize: '12px', fontWeight: '600', color: '#046A38' }}>Patients</span></div>
+              <div style={{ fontSize: '11.5px', color: '#64748B', marginTop: '2px' }}>
+                <strong style={{ color: '#046A38' }}>{doctor.todayQueue?.filter(q => q.status?.includes('Completed')).length || 0} Reviewed</strong> • <strong style={{ color: '#2563EB' }}>{doctor.todayQueue?.filter(q => !q.status?.includes('Completed')).length || 0} In Queue</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="doctor-workbench-grid">
           <div className="queue-panel">
             

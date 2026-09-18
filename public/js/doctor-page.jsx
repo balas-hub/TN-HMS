@@ -2744,7 +2744,13 @@ function DoctorStandaloneApp() {
       const saved = sessionStorage.getItem('doctorSession');
       return saved ? JSON.parse(saved) : null;
     } catch (e) {
-      return null;
+      return {
+        name: 'Dr. S. K. Aravind',
+        qualification: 'MD (Gen Med), DM (Cardiology), FACC',
+        department: 'Cardiology',
+        regNo: 'TMC-48291',
+        hospital: 'Government Multi Super Speciality Hospital, Omandurar, Chennai'
+      };
     }
   });
   const [patients, setPatients] = useState(INITIAL_MOCK_PATIENTS);
@@ -3456,6 +3462,17 @@ ${followUp || 'Scheduled in OPD Clinic'}`;
     return !q || apt.patientName.toLowerCase().includes(q) || apt.receiptId.toLowerCase().includes(q) || (apt.issueDescription && apt.issueDescription.toLowerCase().includes(q)) || (apt.status && apt.status.toLowerCase().includes(q));
   });
 
+  // Filtered queue based on search input
+  const filteredQueue = queue.filter(q => {
+    if (!searchQuery.trim()) return true;
+    const qLower = searchQuery.toLowerCase();
+    return (
+      q.name.toLowerCase().includes(qLower) ||
+      q.receiptId.toLowerCase().includes(qLower) ||
+      (q.diagnosis && q.diagnosis.toLowerCase().includes(qLower))
+    );
+  });
+
   if (!doctorSession) {
     return (
       <>
@@ -3570,6 +3587,7 @@ ${followUp || 'Scheduled in OPD Clinic'}`;
               Sign Out
             </button>
           </div>
+
         </div>
       </header>
 
@@ -5766,7 +5784,9 @@ ${followUp || 'Scheduled in OPD Clinic'}`;
             )}
 
           </div>
+
         </div>
+
       </main>
 
       {/* TELEMEDICINE VIDEO MODAL */}
@@ -5829,6 +5849,7 @@ ${followUp || 'Scheduled in OPD Clinic'}`;
   );
 }
 
-// Mount Doctor App
+// Mount Dedicated Doctor Application
 const doctorRoot = ReactDOM.createRoot(document.getElementById('doctor-root'));
 doctorRoot.render(<DoctorStandaloneApp />);
+
