@@ -50,21 +50,23 @@ function Header({ onNavigate, clientSession, doctorSession, onOpenLoginModal }) 
         <div className="brand-wrapper" onClick={() => onNavigate('home')}>
           <img 
             src={LOGO_SRC} 
-            alt="Government of Tamil Nadu Official Emblem" 
+            alt="Medical Emblem" 
             className="emblem-logo-img"
           />
           <div className="brand-text">
-            <span className="brand-tamil tamil-font">தமிழ்நாடு அரசு • மக்கள் நல்வாழ்வுத்துறை</span>
-            <span className="brand-title">Tamil Nadu Health Care</span>
+            <span className="brand-tamil" style={{ color: '#0284C7', fontWeight: '800', fontSize: '11px', letterSpacing: '0.5px' }}>NATIONAL DIGITAL HEALTH MISSION</span>
+            <span className="brand-title">Health Care Portal</span>
             <span className="brand-subtitle">Pan-India Medical Centre & Multi Super Speciality Network</span>
           </div>
         </div>
 
         <ul className="nav-menu">
           <li><a href="#hero-search" className="nav-link active">Home</a></li>
-          <li><a href="#record-result-section" className="nav-link">Patient Records</a></li>
-          <li><a href="#pan-india-section" className="nav-link">Pan-India Network</a></li>
-          <li><a href="#specialties-section" className="nav-link">Specialties</a></li>
+          <li><a href="/client" className="nav-link">Patient Portal</a></li>
+          <li><a href="/doctor" className="nav-link">Doctor OPD</a></li>
+          <li><a href="/lis" className="nav-link" style={{ color: '#0D9488', fontWeight: '700' }}>🔬 LIS Lab</a></li>
+          <li><a href="/pis" className="nav-link" style={{ color: '#046A38', fontWeight: '700' }}>💊 PIS Pharmacy</a></li>
+          <li><a href="/ris" className="nav-link" style={{ color: '#0284C7', fontWeight: '700' }}>☢️ RIS Scan Ward</a></li>
         </ul>
 
         <div className="nav-cta-group">
@@ -289,6 +291,7 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
   const [activeTab, setActiveTab] = useState('overview');
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [appointments, setAppointments] = useState([]);
+  const [activePACSStudy, setActivePACSStudy] = useState(null);
 
   const fetchAppointments = useCallback(async () => {
     const pid = patient.id || patient.receiptId;
@@ -315,10 +318,10 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
       <header style={{ background: '#FFFFFF', borderBottom: '2px solid var(--primary)', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px', flexWrap: 'wrap', gap: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={onNavigateHome}>
-            <img src={LOGO_SRC} alt="Emblem" className="emblem-logo-img" style={{ width: '48px', height: '48px' }} />
+            <img src={LOGO_SRC} alt="Medical Emblem" className="emblem-logo-img" style={{ width: '44px', height: '44px' }} />
             <div>
               <span style={{ fontSize: '11px', color: 'var(--primary)', fontWeight: '800', textTransform: 'uppercase' }}>
-                TAMIL NADU CITIZEN HEALTH PORTAL
+                CITIZEN HEALTH PORTAL
               </span>
               <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
                 Patient Health Locker & Telemedicine
@@ -522,6 +525,14 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
             ABHA Health Card
+          </button>
+          <button 
+            className={`modal-tab-btn ${activeTab === 'radiology' ? 'active' : ''}`}
+            onClick={() => setActiveTab('radiology')}
+            style={{ fontSize: '15px', padding: '12px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="5"/></svg>
+            Radiology & Digital Scans ({patient.radiologyStudies?.length || 0})
           </button>
         </div>
 
@@ -852,10 +863,10 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
               {/* Top Bar of the Card */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '14px', marginBottom: '18px', flexWrap: 'wrap', gap: '10px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <img src={LOGO_SRC} alt="Government of Tamil Nadu" style={{ width: '42px', height: '42px', background: '#FFFFFF', borderRadius: '50%', padding: '2px' }} />
+                  <img src={LOGO_SRC} alt="Medical Emblem" style={{ width: '42px', height: '42px', background: '#FFFFFF', borderRadius: '50%', padding: '2px' }} />
                   <div>
                     <div style={{ fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase', color: '#A7F3D0', fontWeight: '800' }}>
-                      GOVERNMENT OF TAMIL NADU • DEPARTMENT OF HEALTH & FAMILY WELFARE
+                      NATIONAL DIGITAL HEALTH MISSION • UNIFIED CITIZEN HEALTH CARD
                     </div>
                     <div style={{ fontSize: '15px', fontWeight: '800', letterSpacing: '0.5px' }}>
                       AYUSHMAN BHARAT DIGITAL MISSION (ABDM) HEALTH CARD
@@ -1038,7 +1049,7 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
                 </div>
 
                 <div style={{ background: '#F8FAFC', padding: '14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                  <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>District in Tamil Nadu</div>
+                  <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>District / City</div>
                   <div style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', marginTop: '2px' }}>
                     {patient.district || 'Chennai (Apex Zone)'}
                   </div>
@@ -1076,6 +1087,16 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
           </div>
         )}
 
+        {/* Tab: Radiology & Digital Scans */}
+        {activeTab === 'radiology' && (
+          <RadiologyStudiesPanel
+            studies={patient.radiologyStudies || []}
+            onLaunchPACS={(study) => setActivePACSStudy(study)}
+            onOrderStudy={null}
+            isDoctor={false}
+          />
+        )}
+
         {/* Schedule Consultation Modal */}
         <ScheduleConsultationModal 
           isOpen={isScheduleModalOpen}
@@ -1085,6 +1106,15 @@ function DedicatedClientPortalPage({ patient, onLogout, onNavigateHome, onStartV
           onScheduled={fetchAppointments}
         />
       </main>
+
+      {/* PACS DICOM Medical Imaging Viewer Modal */}
+      {activePACSStudy && (
+        <PACSViewerModal
+          study={activePACSStudy}
+          onClose={() => setActivePACSStudy(null)}
+          onToast={onToast}
+        />
+      )}
     </div>
   );
 }
@@ -1135,6 +1165,110 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
         setPulse(data.patient.vitals.pulse);
       }
     } catch (e) {}
+  };
+
+  const handleAttendPatient = async (patient) => {
+    if (!patient) return;
+    try {
+      await fetch('/api/doctor/attend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          receiptId: patient.receiptId,
+          patientId: patient.id,
+          doctor: {
+            name: doctor.name,
+            regNo: doctor.regNo,
+            department: doctor.specialty || doctor.department || 'Cardiology'
+          }
+        })
+      });
+      onToast(`👨‍⚕️ Dr. ${doctor.name} (${doctor.specialty || doctor.department || 'Specialist'}) is attending ${patient.name}`);
+    } catch (e) {}
+  };
+
+  const handleGenerateNotes = (formatKey) => {
+    if (!selectedQueuePatient) return;
+    const p = selectedQueuePatient;
+    const docDept = doctor.specialty || doctor.department || 'Cardiology';
+    const complaints = p.clinicalSummary?.chiefComplaints || 'Routine outpatient consultation.';
+    const allergies = p.clinicalSummary?.allergies || 'No known drug allergies (NKDA)';
+    const diag = diagnosis || p.clinicalSummary?.diagnosis || 'Clinical evaluation';
+    const bpVal = bp || p.vitals?.bp || '120/80 mmHg';
+    const pulseVal = pulse || p.vitals?.pulse || '74 bpm';
+    const spo2Val = p.vitals?.spo2 || '98%';
+    const tempVal = p.vitals?.temp || '98.4 °F';
+    const bsVal = p.vitals?.bloodSugarFasting || '95 mg/dL';
+
+    let generatedText = '';
+    let suggestedDiag = diag;
+
+    if (formatKey === 'cardiology') {
+      suggestedDiag = suggestedDiag.includes('Card') || suggestedDiag.includes('Hypertension') ? suggestedDiag : 'Essential Systemic Hypertension Stage-II with Left Ventricular Strain';
+      generatedText = `CARDIOLOGY OUTPATIENT CONSULTATION & HEMODYNAMIC REVIEW
+Patient: ${p.name} (${p.age}y / ${p.gender}) | Ref: ${p.receiptId}
+Attending Specialist: ${doctor.name} (${doctor.regNo} - ${docDept})
+
+1. CHIEF PRESENTATION & CARDIOVASCULAR HISTORY:
+• Patient presented with: "${complaints}"
+• Cardiac Risk Factors: Known hypertension, sedentary profile, Fasting Sugar: ${bsVal}.
+• Known Drug Allergies: ${allergies}.
+
+2. PHYSICAL EXAMINATION & CARDIOVASCULAR FINDINGS:
+• Blood Pressure: ${bpVal} (Target: <130/80 mmHg) | Pulse: ${pulseVal} (Regular rhythm, no deficit).
+• SpO2: ${spo2Val} on room air | Temperature: ${tempVal}.
+• Heart Sounds: S1, S2 audible clearly. No pathological murmurs, gallops, or friction rubs.
+• Peripheral Perfusion: Bilateral dorsalis pedis and radial pulses palpable; no pedal edema.
+
+3. CLINICAL ASSESSMENT & PLAN:
+• Impression: ${suggestedDiag}
+• Optimize anti-hypertensive titration. Low sodium dietary regime (<2g NaCl/day).
+• Follow-up lipid profile and serum electrolytes in 4 weeks.`;
+    } else if (formatKey === 'neurology') {
+      suggestedDiag = 'Chronic Vascular Cephalea / Tension-Type Neuro-Vascular Headache';
+      generatedText = `NEUROLOGICAL CLINICAL EVALUATION & CRANIAL NERVE EXAM
+Patient: ${p.name} (${p.age}y / ${p.gender}) | Ref: ${p.receiptId}
+Attending Neurologist: ${doctor.name} (${doctor.regNo})
+
+1. SUBJECTIVE SYMPTOMATOLOGY:
+• Primary Complaints: "${complaints}"
+• Drug Allergies: ${allergies}.
+
+2. OBJECTIVE NEUROLOGIC STATUS:
+• Hemodynamics: BP ${bpVal}, Pulse ${pulseVal}, SpO2 ${spo2Val}.
+• Higher Mental Functions: Alert, conscious, oriented to time, place, and person (GCS 15/15).
+• Cranial Nerves: CN II-XII grossly intact. Pupils equal, round, and reactive to light (PEARL 3mm).
+• Motor Function: Muscle tone normal. Power 5/5 in all 4 extremities. Reflexes 2+ symmetrical.
+• Sensory & Cerebellar: Normal light touch sensation. Finger-to-nose test negative. Gait steady.
+
+3. IMPRESSION & MANAGEMENT:
+• Assessment: ${suggestedDiag}
+• Prophylactic neuro-protective management initiated. Sleep hygiene advised.`;
+    } else if (formatKey === 'soap') {
+      generatedText = `INSTITUTIONAL CLINICAL SOAP PROGRESS NOTE
+Patient: ${p.name} | Receipt: ${p.receiptId} | Attending: Dr. ${doctor.name}
+
+[S] SUBJECTIVE:
+• Chief Complaint: "${complaints}"
+• Reported Allergies: ${allergies}
+
+[O] OBJECTIVE:
+• Vitals: BP ${bpVal} | Pulse ${pulseVal} | SpO2 ${spo2Val} | Temp ${tempVal} | FBS ${bsVal}
+• General: Conscious, oriented, no pallor, icterus, cyanosis, or lymphadenopathy.
+
+[A] ASSESSMENT:
+• Definitive Diagnosis: ${diag}
+
+[P] PLAN:
+• Medical therapy prescribed as per Tamil Nadu Essential Drug List.
+• Diet and lifestyle counselling provided. Review in OPD as advised.`;
+    }
+
+    if (suggestedDiag && (!diagnosis || diagnosis === 'Routine outpatient consultation.')) {
+      setDiagnosis(suggestedDiag);
+    }
+    setNotes(generatedText);
+    onToast(`✨ Generated ${formatKey.toUpperCase()} clinical documentation for ${p.name}`);
   };
 
   const handleAcceptSchedule = async (apt) => {
@@ -1188,7 +1322,9 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
           notes,
           bp,
           pulse,
-          newPrescriptions
+          newPrescriptions,
+          consultingDoctor: doctor.name,
+          doctorRegNo: doctor.regNo
         })
       });
       const data = await res.json();
@@ -1207,11 +1343,11 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
       <header className="doctor-page-header">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={onNavigateHome}>
-            <img src={LOGO_SRC} alt="Emblem" className="emblem-logo-img" style={{ width: '48px', height: '48px' }} />
+            <img src={LOGO_SRC} alt="Medical Emblem" className="emblem-logo-img" style={{ width: '44px', height: '44px' }} />
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '11px', color: '#38BDF8', fontWeight: '800', textTransform: 'uppercase' }}>
-                  TAMIL NADU MEDICAL COUNCIL • CLINICAL OPD DESK
+                  CLINICAL OPD DESK • DOCTOR WORKBENCH
                 </span>
                 <span className="badge-primary" style={{ fontSize: '10px', padding: '1px 6px' }}>ONLINE ACTIVE</span>
               </div>
@@ -1359,18 +1495,28 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
                       Receipt ID: <strong>{selectedQueuePatient.receiptId}</strong> | ABHA: <strong>{selectedQueuePatient.abhaId}</strong> | Blood Group: <strong style={{ color: '#DC2626' }}>{selectedQueuePatient.bloodGroup}</strong> | Age: {selectedQueuePatient.age}
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '10px' }}>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <button 
+                      type="button" 
+                      className="btn" 
+                      style={{ background: '#0284C7', color: '#FFFFFF', padding: '10px 14px', fontSize: '13px', fontWeight: '700', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
+                      onClick={() => handleAttendPatient(selectedQueuePatient)}
+                    >
+                      👨‍⚕️ Attend Patient ({doctor.specialty || doctor.department || 'Specialist'})
+                    </button>
                     <button className="btn btn-video" style={{ padding: '10px 18px', fontSize: '13.5px', display: 'inline-flex', alignItems: 'center', gap: '8px' }} onClick={() => onStartVideoCall(selectedQueuePatient, 'doctor')}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                      Start Video Consultation with Patient
+                      Start Video Consultation
                     </button>
                     <button className="btn btn-outline" style={{ fontSize: '12px' }} onClick={() => { onNavigateHome(); onSearch(selectedQueuePatient.receiptId); }}>
-                      View Full Clinical Sheet
+                      Full Sheet
                     </button>
                   </div>
                 </div>
 
                 <form onSubmit={handleSave}>
+
+
                   <div className="form-group">
                     <label className="form-label">Clinical Diagnosis & Findings</label>
                     <textarea 
@@ -1386,7 +1532,7 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
                     <label className="form-label">Physician Progress Clinical Notes</label>
                     <textarea 
                       className="form-control" 
-                      rows="3" 
+                      rows="4" 
                       value={notes} 
                       onChange={(e) => setNotes(e.target.value)} 
                       required 
@@ -1451,10 +1597,10 @@ function DedicatedDoctorPortalPage({ doctor, onLogout, onNavigateHome, onStartVi
 function LoginModal({ isOpen, mode, onClose, onClientLoginSuccess, onDoctorLoginSuccess, onToast }) {
   const [authMode, setAuthMode] = useState(mode === 'register' ? 'register' : 'login');
   const [tab, setTab] = useState('abha');
-  const [authInput, setAuthInput] = useState('14-8821-3342-9901');
-  const [authPin, setAuthPin] = useState('1234');
-  const [regNo, setRegNo] = useState('TMC-48291');
-  const [doctorPin, setDoctorPin] = useState('1234');
+  const [authInput, setAuthInput] = useState('');
+  const [authPin, setAuthPin] = useState('');
+  const [regNo, setRegNo] = useState('');
+  const [doctorPin, setDoctorPin] = useState('');
 
   // New Patient Account Registration State - Minimal Personal Details
   const [regName, setRegName] = useState('');
@@ -1797,7 +1943,7 @@ function LoginModal({ isOpen, mode, onClose, onClientLoginSuccess, onDoctorLogin
 
                         <div className="form-group">
                           <label className="form-label" style={{ display: 'block', fontSize: '12.5px', fontWeight: '700', marginBottom: '4px' }}>
-                            District in Tamil Nadu *
+                            District / City *
                           </label>
                           <select 
                             className="form-control"
@@ -2038,12 +2184,12 @@ function HeroSearch({ onSearch, onOpenLoginModal, searchInput, setSearchInput })
         <div className="hero-grid">
           <div className="hero-content">
             <h1>
-              Tamil Nadu Healthcare & <br/>
+              Unified Healthcare & <br/>
               <span className="highlight">Pan-India Medical Centre</span>
             </h1>
 
             <p className="hero-lead">
-              A state-of-the-art tertiary care and unified health records portal connecting patients, clinicians, and government multi-super speciality medical colleges across Tamil Nadu and apex institutions nationwide.
+              A state-of-the-art tertiary care and unified health records portal connecting patients, clinicians, and multi-super speciality medical centres nationwide.
             </p>
 
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -2075,6 +2221,15 @@ function HeroSearch({ onSearch, onOpenLoginModal, searchInput, setSearchInput })
               </a>
               <a href="/doctor" className="btn btn-outline" style={{ textDecoration: 'none' }}>
                 Doctor Portal
+              </a>
+              <a href="/lis" className="btn btn-outline" style={{ background: '#F0FDFA', borderColor: '#99F6E4', color: '#0D9488', fontWeight: '700', textDecoration: 'none' }}>
+                🔬 LIS Lab
+              </a>
+              <a href="/pis" className="btn btn-outline" style={{ background: '#F0FDF4', borderColor: '#BBF7D0', color: '#046A38', fontWeight: '700', textDecoration: 'none' }}>
+                💊 PIS Pharmacy
+              </a>
+              <a href="/ris" className="btn btn-outline" style={{ background: '#F0F9FF', borderColor: '#BAE6FD', color: '#0284C7', fontWeight: '700', textDecoration: 'none' }}>
+                ☢️ RIS Scans
               </a>
             </div>
           </div>
@@ -2127,7 +2282,7 @@ function HeroSearch({ onSearch, onOpenLoginModal, searchInput, setSearchInput })
 }
 
 // 7. PATIENT RECORD VIEW
-function PatientRecordView({ patient, onDownload, onStartVideoCall }) {
+function PatientRecordView({ patient, onDownload, onStartVideoCall, onLaunchPACS }) {
   if (!patient) return null;
 
   return (
@@ -2145,9 +2300,8 @@ function PatientRecordView({ patient, onDownload, onStartVideoCall }) {
               <div style={{ width: '48px', height: '48px', background: '#FFFFFF', borderRadius: '50%', padding: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 2px 6px rgba(0,0,0,0.25)', overflow: 'hidden' }}>
                 <img 
                   src={LOGO_SRC} 
-                  alt="Government of Tamil Nadu Official Emblem" 
+                  alt="Medical Emblem" 
                   style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-                  onError={(e) => { e.target.src = '/Tamil_Nadu.svg'; }}
                 />
               </div>
               <div className="rec-title-wrap">
@@ -2311,7 +2465,7 @@ function PatientRecordView({ patient, onDownload, onStartVideoCall }) {
                         <td>{idx + 1}</td>
                         <td style={{ fontWeight: '700', color: '#0F172A' }}>{rx.medicine}</td>
                         <td>{rx.dosage}</td>
-                        <td><span className="status-badge status-normal" style={{ fontFamily: 'monospace' }}>{rx.frequency}</span></td>
+                        <td><span className="status-badge status-normal" style={{ fontWeight: '700' }}>{rx.frequency}</span></td>
                         <td>{rx.timing}</td>
                         <td>{rx.duration}</td>
                         <td style={{ fontSize: '12px', color: '#475569' }}>{rx.instructions}</td>
@@ -2321,6 +2475,47 @@ function PatientRecordView({ patient, onDownload, onStartVideoCall }) {
                 </table>
               </div>
             </div>
+
+            {/* DIGITAL RADIOLOGY & PACS SCANS */}
+            {patient.radiologyStudies && patient.radiologyStudies.length > 0 && (
+              <div className="record-section-block">
+                <div className="sec-head">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2">
+                    <rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="5"/>
+                  </svg>
+                  Radiology Information System (RIS) & Digital PACS Scans ({patient.radiologyStudies.length})
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+                  {patient.radiologyStudies.map((study, sIdx) => (
+                    <div key={sIdx} style={{ background: '#0F172A', color: '#FFFFFF', borderRadius: '10px', padding: '16px', border: '1px solid #1E293B', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <span style={{ background: '#0284C7', color: '#FFFFFF', fontSize: '11px', fontWeight: '800', padding: '2px 8px', borderRadius: '4px' }}>
+                            {study.modality} • {study.body_part || study.study_type}
+                          </span>
+                          <span style={{ color: '#38BDF8', fontSize: '11px', fontWeight: '700' }}>
+                            Acc: {study.accessionNo}
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#FFFFFF', margin: '0 0 6px' }}>
+                          {study.studyTitle}
+                        </h4>
+                        <p style={{ fontSize: '12px', color: '#94A3B8', margin: '0 0 8px', lineHeight: '1.4' }}>
+                          "{study.impression || study.findings}"
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => onLaunchPACS && onLaunchPACS(study)}
+                        style={{ background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)', color: '#FFFFFF', border: 'none', borderRadius: '6px', padding: '8px 12px', fontSize: '12.5px', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '10px' }}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="5"/></svg>
+                        Launch PACS DICOM Viewer
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="insurance-banner">
               <div>
@@ -2425,10 +2620,10 @@ function VideoConsultationModal({ room, onClose, onToast }) {
       <div className="video-consult-window">
         <div className="video-consult-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img src={LOGO_SRC} alt="Emblem" style={{ width: '36px', height: '36px' }} />
+            <img src={LOGO_SRC} alt="Medical Emblem" style={{ width: '36px', height: '36px' }} />
             <div>
               <span style={{ fontSize: '11px', color: '#38BDF8', fontWeight: '800', textTransform: 'uppercase' }}>
-                TAMIL NADU TELEMEDICINE CONSULTATION ROOM
+                TELEMEDICINE CONSULTATION ROOM
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <h3 style={{ fontSize: '17px', fontWeight: '800', margin: 0 }}>
@@ -2605,14 +2800,14 @@ function VideoConsultationModal({ room, onClose, onToast }) {
 // 9. PAN INDIA NETWORK & SPECIALTIES
 function PanIndiaSection() {
   const centres = [
-    { city: "Chennai (Apex Centre)", hospital: "Govt Multi Super Speciality Hospital (Omandurar)", beds: 500, emergency: "044-2566 5000", badge: "Apex Centre - Tamil Nadu" },
-    { city: "Madurai", hospital: "Government Rajaji Hospital & Pan-India Medical Centre", beds: 1400, emergency: "0452-253 2535", badge: "Southern Hub" },
+    { city: "Chennai (Apex Centre)", hospital: "Govt Multi Super Speciality Hospital (Omandurar)", beds: 500, emergency: "044-2566 5000", badge: "Apex Centre" },
+    { city: "Madurai", hospital: "Rajaji Hospital & Pan-India Medical Centre", beds: 1400, emergency: "0452-253 2535", badge: "Southern Hub" },
     { city: "Coimbatore", hospital: "Coimbatore Medical College Hospital & Trauma Centre", beds: 1250, emergency: "0422-230 1393", badge: "Western Hub" },
-    { city: "Tiruchirappalli", hospital: "K.A.P. Viswanatham Government Medical College Hospital", beds: 850, emergency: "0431-240 1011", badge: "Central Hub" },
-    { city: "New Delhi", hospital: "Tamil Nadu House Healthcare Facilitation & AIIMS Liaison", beds: 120, emergency: "011-2419 3100", badge: "Pan-India Northern Cell" },
+    { city: "Tiruchirappalli", hospital: "K.A.P. Viswanatham Medical College Hospital", beds: 850, emergency: "0431-240 1011", badge: "Central Hub" },
+    { city: "New Delhi", hospital: "National Healthcare Facilitation & AIIMS Liaison", beds: 120, emergency: "011-2419 3100", badge: "Pan-India Northern Cell" },
     { city: "Bengaluru", hospital: "Pan-India Inter-State Patient Care & Referral Wing", beds: 200, emergency: "080-2227 4444", badge: "Southern Inter-State Cell" },
-    { city: "Mumbai", hospital: "Tamil Nadu Healthcare Support Desk (KEM / Tata Memorial)", beds: 150, emergency: "022-2410 7000", badge: "Oncology Liaison Wing" },
-    { city: "Kolkata", hospital: "Tamil Nadu Healthcare Facilitation Cell (Eastern Region)", beds: 160, emergency: "033-2287 5500", badge: "Eastern Inter-State Cell" }
+    { city: "Mumbai", hospital: "Apex Healthcare Support Desk (KEM / Tata Memorial)", beds: 150, emergency: "022-2410 7000", badge: "Oncology Liaison Wing" },
+    { city: "Kolkata", hospital: "Inter-State Healthcare Facilitation Cell (Eastern Region)", beds: 160, emergency: "033-2287 5500", badge: "Eastern Inter-State Cell" }
   ];
 
   return (
@@ -2620,7 +2815,7 @@ function PanIndiaSection() {
       <div className="container">
         <div className="section-head">
           <span className="section-tag">HEALTHCARE INFRASTRUCTURE</span>
-          <h2 className="section-title">Tamil Nadu & Pan-India Medical Network</h2>
+          <h2 className="section-title">National & Pan-India Medical Network</h2>
           <p className="section-sub">Comprehensive multi-super speciality tertiary hospitals, medical college hospitals, and inter-state patient facilitation desks.</p>
         </div>
 
@@ -2757,17 +2952,17 @@ function SiteFooter({ onOpenLoginModal }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <img src={LOGO_SRC} alt="Emblem" style={{ width: '44px', height: '44px' }} />
+              <img src={LOGO_SRC} alt="Medical Emblem" style={{ width: '44px', height: '44px' }} />
               <div>
-                <h4 style={{ color: '#FFFFFF', margin: 0, fontSize: '17px' }}>Tamil Nadu Health Care</h4>
+                <h4 style={{ color: '#FFFFFF', margin: 0, fontSize: '17px' }}>Health Care Portal</h4>
                 <span style={{ fontSize: '11px', color: '#38BDF8' }}>Pan-India Medical Centre Network</span>
               </div>
             </div>
             <p>
-              An initiative under the Department of Health and Family Welfare, Government of Tamil Nadu, integrating tertiary care hospitals with the national digital health ecosystem.
+              A unified digital health initiative integrating tertiary care hospitals with the national digital health ecosystem.
             </p>
             <div style={{ fontSize: '12px', color: '#64748B' }}>
-              National Health Authority (NHA) • ABDM Ayushman Bharat Digital Mission • CMCHIS Health Scheme
+              National Health Authority (NHA) • ABDM Ayushman Bharat Digital Mission • Cashless Health Schemes
             </div>
           </div>
 
@@ -2777,7 +2972,7 @@ function SiteFooter({ onOpenLoginModal }) {
               <li><a href="tel:108">108 - Emergency Ambulance</a></li>
               <li><a href="tel:104">104 - Medical Advisory</a></li>
               <li><a href="tel:14416">14416 - Tele-MANAS (Mental Health)</a></li>
-              <li><a href="tel:18004253993">1800-425-3993 - CMCHIS Insurance</a></li>
+              <li><a href="tel:18004253993">1800-425-3993 - Health Insurance Helpline</a></li>
             </ul>
           </div>
 
@@ -2785,7 +2980,7 @@ function SiteFooter({ onOpenLoginModal }) {
             <h5>Apex Hospitals</h5>
             <ul className="footer-links">
               <li><a href="#pan-india-section">Govt Multi Super Speciality, Chennai</a></li>
-              <li><a href="#pan-india-section">Government Rajaji Hospital, Madurai</a></li>
+              <li><a href="#pan-india-section">Rajaji Hospital, Madurai</a></li>
               <li><a href="#pan-india-section">Coimbatore Medical College Hospital</a></li>
               <li><a href="#pan-india-section">Pan-India Referral Liaison Cell</a></li>
             </ul>
@@ -2804,10 +2999,7 @@ function SiteFooter({ onOpenLoginModal }) {
 
         <div className="footer-bottom">
           <div>
-            © 2026 Tamil Nadu Health & Family Welfare Department • Pan-India Medical Centre Network.
-          </div>
-          <div>
-            Official Emblem: Government of Tamil Nadu Standard (தமிழ்நாடு அரசு)
+            © 2026 Health Care Portal • Pan-India Medical Centre Network.
           </div>
         </div>
       </div>
@@ -2842,8 +3034,9 @@ function App() {
   });
   const [doctorSession, setDoctorSession] = useState(null);
 
-  // Video Room
+  // Video Room & PACS
   const [activeVideoRoom, setActiveVideoRoom] = useState(null);
+  const [activePACSStudy, setActivePACSStudy] = useState(null);
   const [toasts, setToasts] = useState([]);
 
   const addToast = useCallback((message, type = 'success') => {
@@ -2857,7 +3050,7 @@ function App() {
   const handleThemeChange = (newTheme) => {
     setCurrentTheme(newTheme);
     document.body.className = newTheme === 'default' ? '' : newTheme;
-    addToast(`Theme switched to ${newTheme === 'default' ? 'Royal Medical Navy' : newTheme === 'theme-emerald' ? 'Tamil Nadu Emerald' : 'Clinical Ocean Cyan'}`);
+    addToast(`Theme switched to ${newTheme === 'default' ? 'Royal Medical Navy' : newTheme === 'theme-emerald' ? 'Emerald Medical' : 'Clinical Ocean Cyan'}`);
   };
 
   const searchPatient = useCallback(async (query) => {
@@ -2892,10 +3085,12 @@ function App() {
   };
 
   const handleDoctorLoginSuccess = (doctor) => {
+    try {
+      sessionStorage.setItem('doctorSession', JSON.stringify(doctor));
+    } catch (e) {}
     setDoctorSession(doctor);
     setIsLoginModalOpen(false);
-    setCurrentView('doctor-portal');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = '/doctor';
   };
 
   const handleStartVideoCall = async (patient, role) => {
@@ -2922,7 +3117,7 @@ function App() {
   };
 
   const handleDownload = (patient) => {
-    const content = `TAMIL NADU HEALTH CARE & PAN-INDIA MEDICAL CENTRE\nOFFICIAL RECORD SUMMARY\nReceipt ID: ${patient.receiptId}\nPatient: ${patient.name}\nDiagnosis: ${patient.clinicalSummary.diagnosis}\nVitals: ${patient.vitals.bp}, Pulse: ${patient.vitals.pulse}\nDoctor: ${patient.consultingDoctor}`;
+    const content = `HEALTH CARE & PAN-INDIA MEDICAL CENTRE\nOFFICIAL RECORD SUMMARY\nReceipt ID: ${patient.receiptId}\nPatient: ${patient.name}\nDiagnosis: ${patient.clinicalSummary.diagnosis}\nVitals: ${patient.vitals.bp}, Pulse: ${patient.vitals.pulse}\nDoctor: ${patient.consultingDoctor}`;
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -2994,6 +3189,7 @@ function App() {
             patient={patientRecord}
             onDownload={handleDownload}
             onStartVideoCall={handleStartVideoCall}
+            onLaunchPACS={(study) => setActivePACSStudy(study)}
           />
           <PanIndiaSection />
           <SpecialtiesSection />
@@ -3019,6 +3215,15 @@ function App() {
             setActiveVideoRoom(null);
             addToast('Video consultation ended');
           }}
+          onToast={addToast}
+        />
+      )}
+
+      {/* PACS DICOM Medical Imaging Viewer Modal */}
+      {activePACSStudy && (
+        <PACSViewerModal
+          study={activePACSStudy}
+          onClose={() => setActivePACSStudy(null)}
           onToast={addToast}
         />
       )}

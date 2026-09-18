@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tamil Nadu Health Care • Citizen Health Portal & Telemedicine</title>
-  <meta name="description" content="Official Citizen Health Locker and Telemedicine Portal. Government of Tamil Nadu Health & Family Welfare Department. Access electronic medical records, lab investigations, CMCHIS billing, and schedule live teleconsultations with specialist doctors.">
-  <link rel="icon" type="image/webp" href="/Tamil_Nadu.webp">
+  <title>Citizen Health Portal & Telemedicine</title>
+  <meta name="description" content="Dedicated Citizen Health Locker and Telemedicine Portal. Access electronic medical records, lab investigations, billing, and schedule live teleconsultations with specialist doctors.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230284C7'/><rect x='43' y='24' width='14' height='52' rx='4' fill='white'/><rect x='24' y='43' width='52' height='14' rx='4' fill='white'/></svg>">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Base64 Logo Data (Guarantees 100% immediate render without network latency) -->
+  <!-- Base64 Logo Data -->
   <script src="js/logo-data.js"></script>
 
   <!-- React 18 & ReactDOM 18 -->
@@ -23,13 +24,16 @@
   <!-- React Mount Point -->
   <div id="client-root">
     <div style="padding: 80px 20px; text-align: center; color: #0F172A; font-family: sans-serif;">
-      <img src="/Tamil_Nadu.webp" alt="Tamil Nadu Government Logo" style="width: 72px; height: 72px; margin-bottom: 16px;" onerror="this.src=window.TN_EMBLEM_DATA_URL" />
-      <h2 style="color: #046A38; font-weight: 800;">தமிழ்நாடு அரசு • மக்கள் நல்வாழ்வுத்துறை</h2>
-      <h3 style="color: #0F172A; margin-top: 4px;">Citizen Health Locker & Telemedicine Portal</h3>
+      <div style="width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 50%; background: #0284C7; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(2,132,199,0.25);">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><path d="M12 2v20M2 12h20"/></svg>
+      </div>
+      <h3 style="color: #0F172A; margin: 0; font-size: 20px; font-weight: 800;">Citizen Health Locker & Telemedicine Portal</h3>
       <p style="color: #64748B; margin-top: 8px;">Loading verified citizen health records & appointments...</p>
     </div>
   </div>
 
+  <!-- RIS & PACS Medical Imaging Module -->
+  <script type="text/babel" src="js/pacs-ris-module.jsx"></script>
   <!-- Dedicated Client Application Logic -->
   <script type="text/babel" src="js/client-page.jsx"></script>
 </body>

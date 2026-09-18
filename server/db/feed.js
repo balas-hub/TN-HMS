@@ -24,6 +24,7 @@ if (result.success) {
   console.log(`      ✓ Clinical Summaries     : ${s.summaries}`);
   console.log(`      ✓ Active Prescriptions   : ${s.prescriptions}`);
   console.log(`      ✓ Diagnostic Lab Reports : ${s.labReports}`);
+  console.log(`      ✓ Digital Radiology Studies: ${s.radiologyStudies}`);
   console.log(`      ✓ CMCHIS Billing Records : ${s.billings}`);
   console.log(`      ✓ Medical Council Doctors: ${s.doctors}`);
   console.log(`      ✓ Active OPD Queue Tokens: ${s.opdQueue}`);

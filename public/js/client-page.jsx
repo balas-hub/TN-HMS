@@ -10,6 +10,238 @@ const LOGO_SRC = (typeof window !== 'undefined' && window.TN_EMBLEM_DATA_URL)
   ? window.TN_EMBLEM_DATA_URL 
   : '/Tamil_Nadu.webp';
 
+const DEFAULT_PROBLEM_LISTS = {
+  "P-1001": [
+    {
+      id: "PL-101",
+      problem: "Ischemic Heart Disease (Single Vessel LAD CAD 40%)",
+      icd10: "I25.10",
+      category: "Cardiovascular",
+      status: "Active",
+      severity: "Moderate",
+      onsetDate: "14-Oct-2025",
+      notes: "Managed medically with Aspirin + Atorvastatin. LVEF 58% on 2D Echo.",
+      recordedBy: "Dr. S. K. Aravind, MD, DM"
+    },
+    {
+      id: "PL-102",
+      problem: "Essential (Primary) Hypertension",
+      icd10: "I10",
+      category: "Cardiovascular",
+      status: "Active",
+      severity: "Mild (Controlled)",
+      onsetDate: "18-May-2024",
+      notes: "Well controlled on Telmisartan 40mg OD. Target BP < 130/80 mmHg.",
+      recordedBy: "Dr. K. Srinivasan, MD"
+    },
+    {
+      id: "PL-103",
+      problem: "Mixed Dyslipidemia & Hypercholesterolemia",
+      icd10: "E78.5",
+      category: "Endocrine & Metabolic",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "05-Nov-2024",
+      notes: "On Atorvastatin 20mg nocte. Low cholesterol diet advised.",
+      recordedBy: "Dr. M. Deepa, MD"
+    },
+    {
+      id: "PL-104",
+      problem: "Hepatic Steatosis (Grade 1 Fatty Liver)",
+      icd10: "K76.0",
+      category: "Gastrointestinal",
+      status: "In Remission",
+      severity: "Mild",
+      onsetDate: "05-Nov-2024",
+      notes: "Identified on ultrasound. Aerobic exercise & weight management advised.",
+      recordedBy: "Dr. M. Deepa, MD"
+    }
+  ],
+  "P-1004": [
+    {
+      id: "PL-401",
+      problem: "Atypical Non-Cardiac Chest Wall Sensitivity",
+      icd10: "R07.89",
+      category: "Musculoskeletal",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "12-Feb-2026",
+      notes: "Musculoskeletal trigger points. Normal 12-lead ECG and 2D Echo.",
+      recordedBy: "Dr. M. Venkat, MD"
+    },
+    {
+      id: "PL-402",
+      problem: "Physiological Sinus Bradycardia",
+      icd10: "R00.1",
+      category: "Cardiovascular",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "07-Sep-2026",
+      notes: "Asymptomatic resting HR 65-70 bpm. Normal rhythm axis.",
+      recordedBy: "Dr. S. K. Aravind, MD, DM"
+    },
+    {
+      id: "PL-403",
+      problem: "Vitamin D Deficiency & Myalgia",
+      icd10: "E55.9",
+      category: "Endocrine & Metabolic",
+      status: "Resolved",
+      severity: "Mild",
+      onsetDate: "01-Dec-2025",
+      notes: "Treated with Cholecalciferol 60K weekly course. Levels normalized.",
+      recordedBy: "General Medicine OPD"
+    }
+  ],
+  "P-1002": [
+    {
+      id: "PL-201",
+      problem: "Migraine with Aura, Intractable",
+      icd10: "G43.109",
+      category: "Neurological",
+      status: "Active",
+      severity: "Moderate",
+      onsetDate: "14-Jan-2024",
+      notes: "Hemicranial throbbing attacks with visual scintillations. Flunarizine 10mg daily + Sumatriptan SOS.",
+      recordedBy: "Dr. Radhika Sundaram, MS, MCh"
+    },
+    {
+      id: "PL-202",
+      problem: "Occipital Neuralgia",
+      icd10: "M54.81",
+      category: "Neurological",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "02-Sep-2026",
+      notes: "Bilateral suboccipital tenderness. Ergonomic correction advised.",
+      recordedBy: "Dr. Radhika Sundaram, MS, MCh"
+    },
+    {
+      id: "PL-203",
+      problem: "Penicillin Drug Allergy (Urticaria)",
+      icd10: "Z88.0",
+      category: "Immunology & Allergy",
+      status: "Chronic",
+      severity: "Moderate",
+      onsetDate: "10-Mar-2019",
+      notes: "Severe cutaneous rash with Amoxicillin. Avoid all Beta-lactams.",
+      recordedBy: "Allergy Clinic"
+    }
+  ],
+  "P-1005": [
+    {
+      id: "PL-501",
+      problem: "Subacute Ischemic Stroke (Right MCA Territory)",
+      icd10: "I63.511",
+      category: "Neurological",
+      status: "Active",
+      severity: "Severe",
+      onsetDate: "08-Sep-2026",
+      notes: "Right corona radiata infarct. Upper limb power 4/5. Under active physiotherapy.",
+      recordedBy: "Dr. Radhika Sundaram, MS, MCh"
+    },
+    {
+      id: "PL-502",
+      problem: "Essential Hypertension",
+      icd10: "I10",
+      category: "Cardiovascular",
+      status: "Active",
+      severity: "Moderate",
+      onsetDate: "08-Sep-2026",
+      notes: "Monitoring BP closely for secondary prevention.",
+      recordedBy: "Dr. Radhika Sundaram, MS, MCh"
+    }
+  ],
+  "P-1006": [
+    {
+      id: "PL-601",
+      problem: "Acute Pediatric Bronchiolitis & Reactive Airway",
+      icd10: "J21.9",
+      category: "Respiratory",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "09-Sep-2026",
+      notes: "Bilateral peribronchial cuffing. Prescribed Budesonide nebulization + Montelukast syrup.",
+      recordedBy: "Dr. K. Balaji, MD, DNB"
+    }
+  ],
+  "P-1007": [
+    {
+      id: "PL-701",
+      problem: "Roseola Infantum (Viral Exanthem - HHV-6)",
+      icd10: "B08.2",
+      category: "Infectious & Pediatric",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "10-Sep-2026",
+      notes: "Defervescent macular trunk rash following 3-day fever. Child active and feeding.",
+      recordedBy: "Dr. K. Balaji, MD, DNB"
+    }
+  ],
+  "P-1003": [
+    {
+      id: "PL-301",
+      problem: "Type 2 Diabetes Mellitus with Microalbuminuria",
+      icd10: "E11.21",
+      category: "Endocrine & Metabolic",
+      status: "Active",
+      severity: "Moderate",
+      onsetDate: "12-Aug-2023",
+      notes: "HbA1c 7.8%. On Metformin 1000mg BD + Glimepiride 1mg OD.",
+      recordedBy: "Dr. K. Srinivasan, MD"
+    },
+    {
+      id: "PL-302",
+      problem: "Diabetic Peripheral Neuropathy",
+      icd10: "E11.40",
+      category: "Neurological",
+      status: "Active",
+      severity: "Mild",
+      onsetDate: "15-Jan-2025",
+      notes: "Bilateral burning sensation in soles. Foot care precautions given.",
+      recordedBy: "Dr. K. Srinivasan, MD"
+    }
+  ],
+  "P-1008": [
+    {
+      id: "PL-801",
+      problem: "Degenerative Lumbar Spondylosis with Radiculopathy (L4-L5)",
+      icd10: "M47.816",
+      category: "Musculoskeletal",
+      status: "Active",
+      severity: "Moderate",
+      onsetDate: "04-Jun-2025",
+      notes: "L4-L5 disc desiccation with right L5 nerve root impingement. Physical therapy & core strengthening advised.",
+      recordedBy: "Orthopedics OPD"
+    }
+  ]
+};
+
+const getPatientProblemList = (patient) => {
+  if (!patient) return [];
+  if (Array.isArray(patient.problemList) && patient.problemList.length > 0) {
+    return patient.problemList;
+  }
+  if (patient.id && DEFAULT_PROBLEM_LISTS[patient.id]) {
+    return DEFAULT_PROBLEM_LISTS[patient.id];
+  }
+  if (patient.clinicalSummary && patient.clinicalSummary.diagnosis) {
+    return [
+      {
+        id: `PL-${patient.id || 'GEN'}-01`,
+        problem: patient.clinicalSummary.diagnosis.split(',')[0].trim(),
+        icd10: 'R69',
+        category: patient.department || 'General Medicine',
+        status: 'Active',
+        severity: 'Moderate',
+        onsetDate: patient.admissionDate || 'Recent',
+        notes: patient.clinicalSummary.clinicalNotes || 'Recorded during clinical evaluation.',
+        recordedBy: patient.consultingDoctor || 'Attending Physician'
+      }
+    ];
+  }
+  return [];
+};
+
 // 1. Toast Notification Component
 function ToastList({ toasts }) {
   return (
@@ -108,10 +340,10 @@ function VideoConsultationModal({ room, onClose, onToast }) {
       <div className="video-consult-window">
         <div className="video-consult-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img src={LOGO_SRC} alt="Emblem" style={{ width: '36px', height: '36px' }} />
+            <img src={LOGO_SRC} alt="Medical Emblem" style={{ width: '36px', height: '36px' }} />
             <div>
               <span style={{ fontSize: '11px', color: '#38BDF8', fontWeight: '800', textTransform: 'uppercase' }}>
-                TAMIL NADU TELEMEDICINE CITIZEN SESSION
+                TELEMEDICINE CITIZEN SESSION
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <h3 style={{ fontSize: '17px', fontWeight: '800', margin: 0, color: '#FFFFFF' }}>
@@ -363,9 +595,26 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
     }
   };
 
+  const symptomPresets = [
+    { label: '🫀 Heart & Chest Pain', dept: 'Cardiology', text: 'Chest tightness, palpitations, and exertion breathlessness', doctor: 'Dr. S. K. Aravind, MD, DM (Cardiology)' },
+    { label: '🧠 Headache & Nerves', dept: 'Neurology', text: 'Severe pulsating migraine headache, numbness, and vertigo', doctor: 'Dr. Radhika Sundaram, MS, MCh (Neurology)' },
+    { label: '👶 Child & Infant Care', dept: 'Pediatrics', text: 'Child nocturnal cough, fever episodes, and pediatric health check', doctor: 'Dr. K. Balaji, MD, DNB (Pediatrics)' },
+    { label: '🩺 Kidney & Swelling', dept: 'Nephrology', text: 'Bilateral pedal edema, elevated creatinine, and reduced urine output', doctor: 'Dr. M. Sangeetha, MD, DM (Nephrology)' },
+    { label: '🦴 Bone & Joint Pain', dept: 'Orthopaedics', text: 'Severe knee joint pain, arthritis stiffness, and mobility difficulty', doctor: 'Orthopaedic Specialist OPD' },
+    { label: '🫁 Breathing & Asthma', dept: 'Pulmonology', text: 'Wheezing, seasonal asthma symptoms, and persistent dry cough', doctor: 'Pulmonology Specialist OPD' }
+  ];
+
+  const handleSelectPreset = (preset) => {
+    setDepartment(preset.dept);
+    setIssueDescription(preset.text);
+    onToast(`Assigned to ${preset.dept} Specialist Doctor!`, 'info');
+  };
+
+  const selectedPreset = symptomPresets.find(p => p.dept === department);
+
   return (
     <div className="modal-overlay" style={{ zIndex: 1100 }}>
-      <div className="modal-dialog" style={{ maxWidth: '560px', width: '92%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
+      <div className="modal-dialog" style={{ maxWidth: '580px', width: '92%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
         <div style={{ background: '#0F4C81', color: '#FFFFFF', padding: '18px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ background: 'rgba(255,255,255,0.15)', padding: '8px', borderRadius: '8px' }}>
@@ -378,7 +627,7 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
             </div>
             <div>
               <h3 style={{ margin: 0, fontSize: '18px', fontWeight: '800' }}>Schedule Video Consultation</h3>
-              <span style={{ fontSize: '11.5px', color: '#93C5FD' }}>Direct Tele-OPD with Government Specialists</span>
+              <span style={{ fontSize: '11.5px', color: '#93C5FD' }}>Direct Specialist Tele-OPD by Patient Health Condition</span>
             </div>
           </div>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#FFFFFF', cursor: 'pointer' }} aria-label="Close">
@@ -387,14 +636,47 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
         </div>
 
         <form onSubmit={handleSubmit} style={{ padding: '24px', background: '#FFFFFF' }}>
-          <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', padding: '12px 14px', borderRadius: '8px', marginBottom: '18px', fontSize: '12.5px', color: '#166534', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <span>Your request and health issue will be broadcasted to <strong>all doctors in the chosen department</strong>. Once any doctor accepts, you will receive confirmed timing notification.</span>
+          {/* Quick Symptom / Condition Selector */}
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', fontSize: '12.5px', fontWeight: '800', color: '#0F172A', marginBottom: '8px' }}>
+              Quick Select Health Condition / Symptoms (Auto-routes to correct doctor):
+            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+              {symptomPresets.map(preset => (
+                <button
+                  key={preset.dept}
+                  type="button"
+                  onClick={() => handleSelectPreset(preset)}
+                  style={{
+                    textAlign: 'left',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    border: department === preset.dept ? '1.5px solid #0F4C81' : '1px solid #E2E8F0',
+                    background: department === preset.dept ? '#EFF6FF' : '#F8FAFC',
+                    color: department === preset.dept ? '#0F4C81' : '#334155',
+                    fontSize: '12px',
+                    fontWeight: department === preset.dept ? '700' : '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div style={{ marginBottom: '16px' }}>
+          {/* Assigned Specialist Doctor Callout Banner */}
+          <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', padding: '12px 14px', borderRadius: '8px', marginBottom: '16px', fontSize: '12.5px', color: '#166534', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>
+              <strong>Specialist Routing:</strong> Appointment will be posted exclusively to <strong>{department}</strong> Doctors ({selectedPreset?.doctor || `${department} Specialist Clinic`}).
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '14px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-              Select Specialty / Medical Department <span style={{ color: '#DC2626' }}>*</span>
+              Specialty / Medical Department <span style={{ color: '#DC2626' }}>*</span>
             </label>
             <select 
               value={department} 
@@ -409,7 +691,7 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
             </select>
           </div>
 
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '14px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
               Describe Your Health Issue / Medical Symptoms <span style={{ color: '#DC2626' }}>*</span>
             </label>
@@ -422,7 +704,7 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
               style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '13.5px' }}
               required
             />
-            <span style={{ fontSize: '11.5px', color: '#64748B' }}>This description will be immediately reviewed by the respective doctors on their clinical workbench.</span>
+            <span style={{ fontSize: '11.5px', color: '#64748B' }}>Posted directly to {department} specialist doctor workbench.</span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
@@ -475,7 +757,7 @@ function ScheduleConsultationModal({ isOpen, onClose, patient, onToast, onSchedu
 // 4. Standalone Patient Login Gate Component
 function PatientLoginGate({ onLoginSuccess, onToast }) {
   const [tab, setTab] = useState('login'); // 'login' | 'register'
-  const [identifier, setIdentifier] = useState('TN-REC-8841');
+  const [identifier, setIdentifier] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   // Registration Form state
@@ -558,10 +840,10 @@ function PatientLoginGate({ onLoginSuccess, onToast }) {
       <header style={{ background: '#FFFFFF', borderBottom: '1px solid #E2E8F0', padding: '14px 0' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img src={LOGO_SRC} alt="Government of Tamil Nadu" style={{ width: '48px', height: '48px' }} />
+            <img src={LOGO_SRC} alt="Medical Portal" style={{ width: '44px', height: '44px' }} />
             <div>
-              <div style={{ fontSize: '11px', color: '#046A38', fontWeight: '800' }}>தமிழ்நாடு அரசு • மக்கள் நல்வாழ்வுத்துறை</div>
-              <div style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A' }}>Tamil Nadu Citizen Health Locker & Tele-OPD</div>
+              <div style={{ fontSize: '11px', color: '#0284C7', fontWeight: '800', textTransform: 'uppercase' }}>Unified Health Care • Patient Portal</div>
+              <div style={{ fontSize: '16px', fontWeight: '800', color: '#0F172A' }}>Citizen Health Locker & Tele-OPD</div>
             </div>
           </div>
           <a href="/" style={{ fontSize: '13.5px', color: '#0F4C81', fontWeight: '700', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -706,7 +988,7 @@ function PatientLoginGate({ onLoginSuccess, onToast }) {
           )}
 
           <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '12px', color: '#94A3B8' }}>
-            Government of Tamil Nadu • Department of Health & Family Welfare
+            Unified Digital Health Mission • Citizen Patient Portal
           </div>
         </div>
       </div>
@@ -726,9 +1008,11 @@ function ClientPortalStandaloneApp() {
   });
 
   const [activeTab, setActiveTab] = useState('overview');
+  const [pastReportSubTab, setPastReportSubTab] = useState('all'); // 'all' | 'diagnoses' | 'medications' | 'labs' | 'radiology'
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [activeVideoRoom, setActiveVideoRoom] = useState(null);
+  const [activePACSStudy, setActivePACSStudy] = useState(null);
   const [toasts, setToasts] = useState([]);
 
   const addToast = useCallback((message, type = 'success') => {
@@ -824,10 +1108,10 @@ function ClientPortalStandaloneApp() {
       <header style={{ background: '#FFFFFF', borderBottom: '2px solid var(--primary)', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px', flexWrap: 'wrap', gap: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <img src={LOGO_SRC} alt="Emblem" className="emblem-logo-img" style={{ width: '48px', height: '48px' }} />
+            <img src={LOGO_SRC} alt="Medical Emblem" className="emblem-logo-img" style={{ width: '44px', height: '44px' }} />
             <div>
               <span style={{ fontSize: '11px', color: 'var(--primary)', fontWeight: '800', textTransform: 'uppercase' }}>
-                TAMIL NADU CITIZEN HEALTH PORTAL
+                CITIZEN HEALTH PORTAL
               </span>
               <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
                 Patient Health Locker & Telemedicine
@@ -858,6 +1142,12 @@ function ClientPortalStandaloneApp() {
               </svg>
               Live Video Room
             </button>
+            <a href="/lis" className="btn btn-outline" style={{ background: '#F0FDFA', borderColor: '#99F6E4', color: '#0D9488', fontWeight: '700', textDecoration: 'none' }}>
+              🔬 LIS Lab
+            </a>
+            <a href="/pis" className="btn btn-outline" style={{ background: '#F0FDF4', borderColor: '#BBF7D0', color: '#046A38', fontWeight: '700', textDecoration: 'none' }}>
+              💊 PIS Pharmacy
+            </a>
             <a href="/" className="btn btn-outline" style={{ textDecoration: 'none' }}>
               Public Portal
             </a>
@@ -1014,8 +1304,16 @@ function ClientPortalStandaloneApp() {
             onClick={() => setActiveTab('labs')}
             style={{ fontSize: '15px', padding: '12px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 2v7.31L4.68 18.2A2 2 0 0 0 6.4 21h11.2a2 2 0 0 0 1.72-2.8L14 9.31V2"/></svg>
             Diagnostic Lab Reports ({patientSession.labReports?.length || 0})
+          </button>
+          <button 
+            className={`modal-tab-btn ${activeTab === 'records' ? 'active' : ''}`}
+            onClick={() => setActiveTab('records')}
+            style={{ fontSize: '15px', padding: '12px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+            Past Patient Reports ({(patientSession.pastRecords?.length || 0) + (patientSession.pastMedications?.length || 0) + (patientSession.labReports?.length || 0) + (patientSession.radiologyStudies?.length || 0)})
           </button>
           <button 
             className={`modal-tab-btn ${activeTab === 'insurance' ? 'active' : ''}`}
@@ -1032,6 +1330,14 @@ function ClientPortalStandaloneApp() {
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
             ABHA Health Card
+          </button>
+          <button 
+            className={`modal-tab-btn ${activeTab === 'radiology' ? 'active' : ''}`}
+            onClick={() => setActiveTab('radiology')}
+            style={{ fontSize: '15px', padding: '12px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="5"/></svg>
+            Radiology & Digital Scans ({patientSession.radiologyStudies?.length || 0})
           </button>
         </div>
 
@@ -1286,47 +1592,356 @@ function ClientPortalStandaloneApp() {
           </div>
         )}
 
-        {/* Tab 4: Lab Reports */}
+        {/* Tab 4: Lab Reports (LIS) */}
         {activeTab === 'labs' && (
           <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', marginBottom: '16px' }}>
-              Laboratory & Diagnostic Investigations
-            </h3>
-            <div className="table-wrapper">
-              <table className="medical-table">
-                <thead>
-                  <tr>
-                    <th>Investigation / Test Name</th>
-                    <th>Date</th>
-                    <th>Observed Result</th>
-                    <th>Normal Reference Range</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(patientSession.labReports || []).map((lab, i) => (
-                    <tr key={i}>
-                      <td style={{ fontWeight: '600', color: '#0F172A' }}>{lab.testName}</td>
-                      <td>{lab.date}</td>
-                      <td><strong>{lab.result}</strong></td>
-                      <td>{lab.normalRange}</td>
-                      <td>
-                        <span className={`status-badge ${
-                          (lab.status || '').toLowerCase().includes('high') ? 'status-alert' :
-                          (lab.status || '').toLowerCase().includes('danger') ? 'status-danger' : 'status-normal'
-                        }`}>
-                          {lab.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+              <div>
+                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" strokeWidth="2.2"><path d="M10 2v7.31L4.68 18.2A2 2 0 0 0 6.4 21h11.2a2 2 0 0 0 1.72-2.8L14 9.31V2"/></svg>
+                  Laboratory & Pathology Reports (LIS)
+                </h3>
+                <p style={{ fontSize: '12.5px', color: '#64748B', margin: '4px 0 0 0' }}>
+                  Verified diagnostic tests and pathology records processed by the Central LIS Laboratory
+                </p>
+              </div>
+              <button className="btn btn-outline" onClick={() => window.print()}>Print Lab Slip</button>
             </div>
+
+            {(!patientSession.labReports || patientSession.labReports.length === 0) ? (
+              <div style={{
+                background: '#F8FAFC',
+                border: '2px dashed #CBD5E1',
+                borderRadius: '12px',
+                padding: '40px 20px',
+                textAlign: 'center'
+              }}>
+                <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#F0FDFA', color: '#0D9488', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M10 2v7.31L4.68 18.2A2 2 0 0 0 6.4 21h11.2a2 2 0 0 0 1.72-2.8L14 9.31V2"/></svg>
+                </div>
+                <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', margin: '0 0 4px 0' }}>
+                  No Diagnostic Lab Reports Available Yet
+                </h4>
+                <p style={{ fontSize: '13px', color: '#64748B', maxWidth: '500px', margin: '0 auto', lineHeight: '1.5' }}>
+                  When your consulting doctor orders blood tests or pathology assays, they appear in the <strong>Laboratory Information System (LIS)</strong>. Once the central hospital lab conducts the analysis and uploads the pathology report, it will instantly display here.
+                </p>
+              </div>
+            ) : (
+              <div className="table-wrapper">
+                <table className="medical-table">
+                  <thead>
+                    <tr>
+                      <th>Investigation / Test Name</th>
+                      <th>Specimen Date</th>
+                      <th>Observed Result</th>
+                      <th>Normal Reference Range</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {patientSession.labReports.map((lab, i) => (
+                      <tr key={i}>
+                        <td style={{ fontWeight: '700', color: '#0F172A' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#0D9488' }}></span>
+                            {lab.testName}
+                          </div>
+                        </td>
+                        <td>{lab.date}</td>
+                        <td style={{ fontWeight: '800', color: '#0F4C81' }}>{lab.result}</td>
+                        <td>{lab.normalRange}</td>
+                        <td>
+                          <span className={`status-badge ${
+                            (lab.status || '').toLowerCase().includes('high') ? 'status-alert' :
+                            (lab.status || '').toLowerCase().includes('danger') ? 'status-danger' : 'status-normal'
+                          }`}>
+                            {lab.status || 'Verified'}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Tab 5: Insurance & Billing */}
+        {/* Tab 5: Past Patient Reports (Categorized & Non-Clumsy) */}
+        {activeTab === 'records' && (
+          <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2.2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                    Past Patient Reports & Medical History
+                  </h3>
+                  <p style={{ fontSize: '12.5px', color: '#64748B', margin: '4px 0 0 0' }}>
+                    Structured longitudinal health records across past diagnoses, prior medications, LIS laboratory tests, and RIS radiology scans.
+                  </p>
+                </div>
+              </div>
+
+              {/* Category Filter Sub-Tabs */}
+              <div style={{ display: 'flex', gap: '8px', borderBottom: '1.5px solid #E2E8F0', paddingBottom: '10px', flexWrap: 'wrap' }}>
+                {[
+                  { id: 'all', label: 'All Past Reports', count: (getPatientProblemList(patientSession).length) + (patientSession.pastRecords?.length || 0) + (patientSession.pastMedications?.length || 0) + (patientSession.labReports?.length || 0) + (patientSession.radiologyStudies?.length || 0) },
+                  { id: 'problems', label: 'Problem List & Conditions', count: getPatientProblemList(patientSession).length },
+                  { id: 'diagnoses', label: 'Past Diagnoses', count: patientSession.pastRecords?.length || 0 },
+                  { id: 'medications', label: 'Past Medications', count: patientSession.pastMedications?.length || 0 },
+                  { id: 'labs', label: 'Past Lab Reports (LIS)', count: patientSession.labReports?.length || 0 },
+                  { id: 'radiology', label: 'Past Radiology Tests (RIS)', count: patientSession.radiologyStudies?.length || 0 }
+                ].map(sub => (
+                  <button
+                    key={sub.id}
+                    type="button"
+                    onClick={() => setPastReportSubTab(sub.id)}
+                    style={{
+                      background: pastReportSubTab === sub.id ? '#0F4C81' : '#F8FAFC',
+                      color: pastReportSubTab === sub.id ? '#FFFFFF' : '#475569',
+                      border: pastReportSubTab === sub.id ? '1px solid #0F4C81' : '1px solid #CBD5E1',
+                      borderRadius: '20px',
+                      padding: '5px 14px',
+                      fontSize: '12.5px',
+                      fontWeight: '700',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    {sub.label}
+                    <span style={{
+                      background: pastReportSubTab === sub.id ? 'rgba(255,255,255,0.25)' : '#E2E8F0',
+                      color: pastReportSubTab === sub.id ? '#FFFFFF' : '#334155',
+                      fontSize: '10.5px',
+                      fontWeight: '800',
+                      padding: '1px 6px',
+                      borderRadius: '10px'
+                    }}>
+                      {sub.count}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Category 0: Problem List & Chronic Conditions */}
+            {(pastReportSubTab === 'all' || pastReportSubTab === 'problems') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#0284C7' }}>●</span> Active Problem List & Chronic Diagnoses ({getPatientProblemList(patientSession).length})
+                </div>
+                {getPatientProblemList(patientSession).length === 0 ? (
+                  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '14px', fontSize: '13px', color: '#64748B', fontStyle: 'italic' }}>
+                    No recorded chronic conditions or problems.
+                  </div>
+                ) : (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px' }}>
+                    {getPatientProblemList(patientSession).map((prob, idx) => (
+                      <div key={idx} style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', borderRadius: '10px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ background: '#0F4C81', color: '#FFFFFF', fontSize: '10.5px', fontWeight: '800', padding: '2px 7px', borderRadius: '4px' }}>
+                            {prob.icd10}
+                          </span>
+                          <span style={{ background: prob.status === 'Active' ? '#DCFCE7' : prob.status === 'Chronic' ? '#E0F2FE' : '#FEF3C7', color: prob.status === 'Active' ? '#166534' : prob.status === 'Chronic' ? '#0369A1' : '#92400E', fontSize: '11px', fontWeight: '800', padding: '2px 8px', borderRadius: '6px' }}>
+                            {prob.status}
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', margin: 0 }}>
+                          {prob.problem}
+                        </h4>
+                        <div style={{ fontSize: '12px', color: '#64748B' }}>
+                          Category: <strong>{prob.category}</strong> • Severity: <strong>{prob.severity}</strong>
+                        </div>
+                        {prob.notes && (
+                          <div style={{ fontSize: '12px', color: '#334155', background: '#FFFFFF', padding: '6px 10px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
+                            {prob.notes}
+                          </div>
+                        )}
+                        <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '2px' }}>
+                          Onset: {prob.onsetDate || 'Recent'} • Logged by: {prob.recordedBy || 'Attending Physician'}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Category 1: Past Diagnoses & Prior Consultations */}
+            {(pastReportSubTab === 'all' || pastReportSubTab === 'diagnoses') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#0284C7' }}>●</span> Past Diagnoses & Prior Hospital Consultations ({patientSession.pastRecords?.length || 0})
+                </div>
+                {(!patientSession.pastRecords || patientSession.pastRecords.length === 0) ? (
+                  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '14px', fontSize: '13px', color: '#64748B', fontStyle: 'italic' }}>
+                    No prior hospital consultation records logged.
+                  </div>
+                ) : (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px' }}>
+                    {patientSession.pastRecords.map((rec, idx) => (
+                      <div key={idx} style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', borderRadius: '10px', padding: '14px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                          <span style={{ background: '#E2E8F0', color: '#0F172A', fontSize: '11px', fontWeight: '800', padding: '2px 8px', borderRadius: '4px' }}>
+                            {rec.id} • {rec.date}
+                          </span>
+                          <span style={{ color: '#046A38', fontSize: '11.5px', fontWeight: '700' }}>
+                            {rec.hospital}
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', margin: '4px 0 2px' }}>
+                          {rec.diagnosis}
+                        </h4>
+                        <div style={{ fontSize: '12px', color: '#475569', marginBottom: '4px' }}>
+                          Consultant: <strong>{rec.doctor}</strong> ({rec.department})
+                        </div>
+                        <p style={{ fontSize: '12px', color: '#334155', fontStyle: 'italic', margin: 0, background: '#FFFFFF', padding: '8px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
+                          "{rec.outcome}"
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Category 2: Past Medications */}
+            {(pastReportSubTab === 'all' || pastReportSubTab === 'medications') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#D97706' }}>●</span> Past Prescription Medications History ({patientSession.pastMedications?.length || 0})
+                </div>
+                {(!patientSession.pastMedications || patientSession.pastMedications.length === 0) ? (
+                  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '14px', fontSize: '13px', color: '#64748B', fontStyle: 'italic' }}>
+                    No past medication records on file.
+                  </div>
+                ) : (
+                  <div className="table-wrapper">
+                    <table className="medical-table">
+                      <thead>
+                        <tr>
+                          <th>Medicine & Dose</th>
+                          <th>Frequency & Timing</th>
+                          <th>Prescribed Date</th>
+                          <th>Prescribed By</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {patientSession.pastMedications.map((pm, idx) => (
+                          <tr key={idx}>
+                            <td style={{ fontWeight: '800', color: '#0F172A' }}>{pm.name || pm.medicine} {pm.dose || pm.dosage}</td>
+                            <td>{pm.frequency} • {pm.timing}</td>
+                            <td>{pm.date}</td>
+                            <td>{pm.prescribedBy}</td>
+                            <td>
+                              <span style={{ background: '#FEF3C7', color: '#92400E', fontSize: '10.5px', fontWeight: '800', padding: '2px 6px', borderRadius: '4px' }}>
+                                {pm.status || 'Previous Course'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Category 3: Past Lab Reports (LIS) */}
+            {(pastReportSubTab === 'all' || pastReportSubTab === 'labs') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#0D9488' }}>●</span> Past Diagnostic Lab Reports (LIS) ({patientSession.labReports?.length || 0})
+                </div>
+                {(!patientSession.labReports || patientSession.labReports.length === 0) ? (
+                  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '14px', fontSize: '13px', color: '#64748B', fontStyle: 'italic' }}>
+                    No past laboratory reports recorded.
+                  </div>
+                ) : (
+                  <div className="table-wrapper">
+                    <table className="medical-table">
+                      <thead>
+                        <tr>
+                          <th>Lab Investigation</th>
+                          <th>Date</th>
+                          <th>Result</th>
+                          <th>Reference Range</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {patientSession.labReports.map((lab, idx) => (
+                          <tr key={idx}>
+                            <td style={{ fontWeight: '700', color: '#0F172A' }}>{lab.testName}</td>
+                            <td>{lab.date}</td>
+                            <td style={{ fontWeight: '800', color: '#0F4C81' }}>{lab.result}</td>
+                            <td>{lab.normalRange}</td>
+                            <td>
+                              <span style={{ background: '#DCFCE7', color: '#166534', fontSize: '10.5px', fontWeight: '800', padding: '2px 6px', borderRadius: '4px' }}>
+                                {lab.status || 'Verified'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Category 4: Past Radiology Tests (RIS) */}
+            {(pastReportSubTab === 'all' || pastReportSubTab === 'radiology') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ fontSize: '14px', fontWeight: '800', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#0284C7' }}>●</span> Past Radiology & PACS Imaging Tests ({patientSession.radiologyStudies?.length || 0})
+                </div>
+                {(!patientSession.radiologyStudies || patientSession.radiologyStudies.length === 0) ? (
+                  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '14px', fontSize: '13px', color: '#64748B', fontStyle: 'italic' }}>
+                    No radiology studies logged.
+                  </div>
+                ) : (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px' }}>
+                    {patientSession.radiologyStudies.map((study, idx) => (
+                      <div key={idx} style={{ background: '#F8FAFC', border: '1px solid #CBD5E1', borderRadius: '10px', padding: '14px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                          <span style={{ background: '#0284C7', color: '#FFFFFF', fontSize: '10.5px', fontWeight: '800', padding: '2px 7px', borderRadius: '4px' }}>
+                            {study.modality}
+                          </span>
+                          <span style={{ fontSize: '11.5px', color: '#64748B' }}>
+                            {study.studyDate}
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: '13.5px', fontWeight: '800', color: '#0F172A', margin: '4px 0 2px' }}>
+                          {study.studyDescription}
+                        </h4>
+                        <div style={{ fontSize: '11.5px', color: '#475569', marginBottom: '8px' }}>
+                          Radiologist: <strong>{study.radiologist}</strong> ({study.seriesCount} series, {study.instanceCount} slices)
+                        </div>
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => setActivePACSStudy(study)}
+                          style={{ padding: '6px 12px', fontSize: '11.5px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="12" cy="12" r="5"/></svg>
+                          View Scan in PACS Viewer
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* Tab 6: Insurance & Billing */}
         {activeTab === 'insurance' && (
           <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', marginBottom: '16px' }}>
@@ -1334,7 +1949,7 @@ function ClientPortalStandaloneApp() {
             </h3>
             <div className="insurance-banner">
               <div>
-                <strong style={{ fontSize: '15px', color: '#0F172A' }}>{patientSession.billing?.insuranceScheme || "CMCHIS - Tamil Nadu State Health Scheme"}</strong>
+                <strong style={{ fontSize: '15px', color: '#0F172A' }}>{patientSession.billing?.insuranceScheme || "Comprehensive Health Insurance Scheme (Cashless)"}</strong>
                 <div style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
                   Total Hospital Claim: <strong>{patientSession.billing?.totalAmount || "₹ 0 (Free Public Care)"}</strong> | Scheme Coverage: <strong>{patientSession.billing?.schemeApproved || "100% Cashless"}</strong>
                 </div>
@@ -1365,10 +1980,10 @@ function ClientPortalStandaloneApp() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '14px', marginBottom: '18px', flexWrap: 'wrap', gap: '10px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <img src={LOGO_SRC} alt="Government of Tamil Nadu" style={{ width: '42px', height: '42px', background: '#FFFFFF', borderRadius: '50%', padding: '2px' }} />
+                  <img src={LOGO_SRC} alt="Medical Emblem" style={{ width: '42px', height: '42px', background: '#FFFFFF', borderRadius: '50%', padding: '2px' }} />
                   <div>
                     <div style={{ fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase', color: '#A7F3D0', fontWeight: '800' }}>
-                      GOVERNMENT OF TAMIL NADU • DEPARTMENT OF HEALTH & FAMILY WELFARE
+                      NATIONAL DIGITAL HEALTH MISSION • UNIFIED CITIZEN HEALTH CARD
                     </div>
                     <div style={{ fontSize: '15px', fontWeight: '800', letterSpacing: '0.5px' }}>
                       AYUSHMAN BHARAT DIGITAL MISSION (ABDM) HEALTH CARD
@@ -1446,7 +2061,7 @@ function ClientPortalStandaloneApp() {
                   <div style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', marginTop: '2px' }}>{patientSession.phone}</div>
                 </div>
                 <div style={{ background: '#F8FAFC', padding: '14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                  <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>District in Tamil Nadu</div>
+                  <div style={{ fontSize: '11px', color: '#64748B', fontWeight: '700', textTransform: 'uppercase' }}>District / City</div>
                   <div style={{ fontSize: '15px', fontWeight: '800', color: '#0F172A', marginTop: '2px' }}>{patientSession.district || 'Chennai (Apex Zone)'}</div>
                 </div>
                 <div style={{ background: '#F8FAFC', padding: '14px', borderRadius: '8px', border: '1px solid #E2E8F0', gridColumn: 'span 2' }}>
@@ -1456,6 +2071,16 @@ function ClientPortalStandaloneApp() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Tab 7: Radiology & Digital Scans */}
+        {activeTab === 'radiology' && (
+          <RadiologyStudiesPanel
+            studies={patientSession.radiologyStudies || []}
+            onLaunchPACS={(study) => setActivePACSStudy(study)}
+            onOrderStudy={null}
+            isDoctor={false}
+          />
         )}
 
         {/* Schedule Consultation Modal */}
@@ -1476,6 +2101,15 @@ function ClientPortalStandaloneApp() {
             setActiveVideoRoom(null);
             addToast('Video consultation session concluded');
           }}
+          onToast={addToast}
+        />
+      )}
+
+      {/* PACS DICOM Medical Imaging Viewer Modal */}
+      {activePACSStudy && (
+        <PACSViewerModal
+          study={activePACSStudy}
+          onClose={() => setActivePACSStudy(null)}
           onToast={addToast}
         />
       )}

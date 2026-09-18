@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -43,20 +44,22 @@
       <!-- Navigation Menu -->
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#hero-search" class="nav-link active">Home</a></li>
-        <li><a href="#record-result-section" class="nav-link" onclick="scrollToSection('record-result-section')">Patient Records</a></li>
-        <li><a href="#pan-india-section" class="nav-link" onclick="scrollToSection('pan-india-section')">Pan-India Network</a></li>
-        <li><a href="#specialties-section" class="nav-link" onclick="scrollToSection('specialties-section')">Specialties</a></li>
+        <li><a href="/client" class="nav-link">Patient Portal</a></li>
+        <li><a href="/doctor" class="nav-link">Doctor OPD</a></li>
+        <li><a href="/lis" class="nav-link" style="color: #0D9488; font-weight: 700;">🔬 LIS Lab</a></li>
+        <li><a href="/pis" class="nav-link" style="color: #046A38; font-weight: 700;">💊 PIS Pharmacy</a></li>
+        <li><a href="/ris" class="nav-link" style="color: #0284C7; font-weight: 700;">☢️ RIS Scan Ward</a></li>
       </ul>
 
       <!-- CTA Action Buttons -->
       <div class="nav-cta-group">
-        <button class="btn btn-primary" onclick="window.AuthEngine.openClientPortal()" id="btn-patient-portal">
+        <a href="/client" class="btn btn-primary" id="btn-patient-portal" style="text-decoration: none;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
           </svg>
           Client Login
-        </button>
+        </a>
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
       </div>
     </div>
@@ -78,7 +81,7 @@
             A state-of-the-art tertiary care and unified health records portal connecting patients, clinicians, and government multi-super speciality medical colleges across Tamil Nadu and apex institutions nationwide.
           </p>
 
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button class="btn btn-primary" onclick="scrollToSection('record-result-section')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"/>
@@ -86,12 +89,18 @@
               </svg>
               Lookup Patient Record
             </button>
-            <button class="btn btn-outline" onclick="window.AuthEngine.openClientPortal()">
-              Patient Health Locker
-            </button>
-            <button class="btn btn-outline" onclick="window.AuthEngine.openDoctorPortal()">
-              Doctor OPD Workbench
-            </button>
+            <a href="/client" class="btn btn-outline" style="text-decoration: none;">
+              Patient Portal
+            </a>
+            <a href="/doctor" class="btn btn-outline" style="text-decoration: none;">
+              Doctor OPD
+            </a>
+            <a href="/lis" class="btn btn-outline" style="background: #F0FDFA; border-color: #99F6E4; color: #0D9488; font-weight: 700; text-decoration: none;">
+              🔬 LIS Lab
+            </a>
+            <a href="/pis" class="btn btn-outline" style="background: #F0FDF4; border-color: #BBF7D0; color: #046A38; font-weight: 700; text-decoration: none;">
+              💊 PIS Pharmacy
+            </a>
           </div>
         </div>
 

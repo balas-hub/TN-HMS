@@ -60,7 +60,7 @@ function renderPatientFullRecord(p) {
       <td>${idx + 1}</td>
       <td style="font-weight: 700; color: #0F172A;">${escapeHtml(rx.medicine)}</td>
       <td>${escapeHtml(rx.dosage)}</td>
-      <td><span class="status-badge status-normal" style="font-family: monospace;">${escapeHtml(rx.frequency)}</span></td>
+      <td><span class="status-badge status-normal" style="font-weight: 700;">${escapeHtml(rx.frequency)}</span></td>
       <td>${escapeHtml(rx.timing)}</td>
       <td>${escapeHtml(rx.duration)}</td>
       <td style="font-size: 12px; color: #475569;">${escapeHtml(rx.instructions)}</td>
